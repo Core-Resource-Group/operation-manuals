@@ -82,7 +82,7 @@
 | `{{STANDBY_CLUSTER}}` (Standby) | Standby CaaS Cluster where the DNS API has been deployed | `jpe2-caas1-prod2` | ❌ |
 | `{{ACTIVE_CLUSTER_ACTIVE_COLOR}}` | The color of the side currently serving traffic on the Active cluster. Determined in Step 6B of Section 6. | `blue/green` | ❌ |
 | `{{CONFIG_REPO_DOMAIN}}` | HTTPS Link needed to access the `apollo-automation` repo | https://github.com/Core-Resource-Group/apollo-automation.git | ❌ |
-| `{{ACTIONS_WORKFLOW_TAG}}` | Short Commit hash of the tag whose GitHub Actions workflows would be run | `0eaae2c` | ❌ |
+| `{{ACTIONS_WORKFLOW_TAG}}` | Short Commit hash of the tag whose GitHub Actions workflows would be run | `faf4d7a` | ❌ |
 | `{{ACTIONS_WORKFLOW_TAG_LINK}}` | Link to the GHE tag whose GitHub Actions workflows would be run | https://github.com/Core-Resource-Group/apollo-automation/releases/tag/frozen-workflow-v1 | ❌ |
 | `{{CONFIG_ROLLOUT_COMMIT_HASH}}` | Full Commit hash of the rollout tag in the `apollo-automation` repo | `182248ff3e0cd46d572d0306bb62e365ace489ed` | ❌ |
 | `{{CONFIG_ROLLOUT_COMMIT_HASH_LINK}}` | Link to the GHE Commit hash for the configuration release | https://github.com/Core-Resource-Group/apollo-automation/commit/182248ff3e0cd46d572d0306bb62e365ace489ed | ❌ |
@@ -256,7 +256,7 @@ All checks above must pass before proceeding to Section 8.
 | 2  | Ensure that within commit `{{CONFIG_ROLLOUT_COMMIT_HASH}}`, ensure that `{{DB_PATCH_FILE_PATH}}` and `{{DB_ROLLBACK_PATCH_FILE_PATH}}` exist and their contents are subjected to a visual inspection and an approval process                             | Initiator  | ❌     |
 | 3  | All variable parameters validated                                  | Initiator  | ❌     |
 | 4  | Operator acknowledges pre-validation steps (Section 6) completed with expected result before executing change | Operator | ❌ |
-| 5  | Operator acknowledges that the GHE Commit hash linked to `{{ACTIONS_WORKFLOW_TAG_LINK}}` is `0eaae2c` | Operator | ❌ |
+| 5  | Operator acknowledges that the GHE Commit hash linked to `{{ACTIONS_WORKFLOW_TAG_LINK}}` is `faf4d7a` | Operator | ❌ |
 | 6  | Buddy acknowledges pre-validation steps (Section 6) completed with expected result before executing change | Buddy | ❌ |
 | 7  | On-call engineer is available and notified                         | Team Lead  | ❌     |
 | 8  | Announcement sent to all required channels (Section 5)             | Initiator  | ❌     |
