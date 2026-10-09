@@ -429,7 +429,7 @@ The below workflow with the passed values includes the following steps:
 Click "Run Workflow" and set:
 - **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
 - **Target environment:** `{{ENV}}`
-- **Full Configuration commit hash to check out (blank = default branch):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
+- **Full Configuration commit hash to check out (blank = default branch/tag):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
 - **Stop at this migration version, e.g. 5 for V005 (blank = migrate to latest):** *(blank)*
 - **Show pending migrations without applying them:** ✅
 
@@ -482,7 +482,7 @@ The below workflow with the passed values includes the following steps:
 Click "Run Workflow" and set:
 - **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
 - **Target environment:** `{{ENV}}`
-- **Full Configuration commit hash to check out (blank = default branch):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
+- **Full Configuration commit hash to check out (blank = default branch/tag):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
 - **Stop at this migration version, e.g. 5 for V005 (blank = migrate to latest):** *(blank)*
 - **Show pending migrations without applying them:** ❌
 
@@ -530,7 +530,7 @@ The below workflow with the passed values includes the following steps:
 Click "Run Workflow" and set:
 - **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
 - **Target environment:** `{{ENV}}`
-- **Full Configuration commit hash to check out (blank = default branch):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
+- **Full Configuration commit hash to check out (blank = default branch/tag):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
 - **Path to the CQL file to apply, relative to the repository root:** `{{DB_PATCH_FILE_PATH}}`
 
 **Expected Result:** Success.
@@ -559,10 +559,11 @@ Link: `{{CONFIG_REPO_DOMAIN}}/actions/workflows/deploy.yml`
 The below workflow with the passed values includes the following steps:
 1. Checkout of the passed commit hash
 2. Restoration of the git-crypt symmetric key and unlocking of the repository
-3. Set up of `kubectl`
-4. Application of consul resources, network policies, dedicated gateway resources, database credential secrets, HPA configuration, filebeat configuration, domain claim resources and load balancer resources if opted for.
-5. Application of app-blue/app-green deployments as applicable.
-6. Locking of the repository
+3. Mapping of the cluster to the directory where the manifests reside.
+4. Set up of `kubectl`
+5. Application of consul resources, network policies, dedicated gateway resources, database credential secrets, HPA configuration, filebeat configuration, domain claim resources and load balancer resources if opted for.
+6. Application of app-blue/app-green deployments as applicable.
+7. Locking of the repository
 
 **Appearance:**
 
@@ -571,7 +572,7 @@ The below workflow with the passed values includes the following steps:
 Click "Run Workflow" and set:
 - **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
 - **Cluster to deploy to:** `{{STANDBY_CLUSTER}}`
-- **Full Configuration commit hash to check out (blank = default branch):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
+- **Full Configuration commit hash to check out (blank = default branch/tag):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
 - **Check this if the common resources need to be applied:** `{{ARE_COMMON_RESOURCES_TO_BE_APPLIED}}`
 - **Check this if the app-blue resources need to be applied:** ✅ if `{{STANDBY_CLUSTER_ACTIVE_COLOR}}`=green and `{{STANDBY_CLUSTER_INACTIVE_COLOR}}`=blue; ❌ if `{{STANDBY_CLUSTER_ACTIVE_COLOR}}`=blue and `{{STANDBY_CLUSTER_INACTIVE_COLOR}}`=green
 - **Check this if the app-green resources need to be applied:** ✅ if `{{STANDBY_CLUSTER_ACTIVE_COLOR}}`=blue and `{{STANDBY_CLUSTER_INACTIVE_COLOR}}`=green; ❌ if `{{STANDBY_CLUSTER_ACTIVE_COLOR}}`=green and `{{STANDBY_CLUSTER_INACTIVE_COLOR}}`=blue
@@ -662,7 +663,8 @@ Link: `{{CONFIG_REPO_DOMAIN}}/actions/workflows/smoke-test-dns-api.yml`
 The below workflow with the passed values includes the following steps:
 1. Checkout of the repository
 2. Set up of the Go GitHub Action
-3. Execution of the smoke test with the passed parameters via a Go script (includes create record, update record, get record and delete record)
+3. Disallowance of smoke tests on the standby side if the target environment is either QA or LAB (as they do not have the standby side)
+4. Execution of the smoke test with the passed parameters via a Go script (includes create record, update record, get record and delete record)
 
 **Appearance:**
 
@@ -671,8 +673,8 @@ The below workflow with the passed values includes the following steps:
 Click "Run Workflow" and set:
 - **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
 - **Target Environment:** `{{ENV}}`
-- **Side to smoke test against (Color - blue or green) (choose either if the target is the QA environment as this value is irrelevant there):** `{{STANDBY_CLUSTER_INACTIVE_COLOR}}`
 - **Cluster to smoke test against (QA and LAB have no Standby cluster — use ACTIVE there):** `STANDBY`
+- **Side to smoke test against (Color - blue or green) (choose either if the target is the QA environment as this value is irrelevant there):** `{{STANDBY_CLUSTER_INACTIVE_COLOR}}`
 - **OneCloud tenant to smoke test against:** `{{TENANT}}`
 - **DNS zone to create the record under, e.g. <tenant>.<az>.dcnw.rakuten., <subdomain>.jp.local., etc.:** `{{ZONE}}`
 - **Record type:** `Address`
@@ -707,9 +709,10 @@ Link: `{{CONFIG_REPO_DOMAIN}}/actions/workflows/deploy.yml`
 The below workflow with the passed values includes the following steps:
 1. Checkout of the passed commit hash
 2. Restoration of the git-crypt symmetric key and unlocking of the repository
-3. Set up of `kubectl`
-4. Blue-Green Traffic routing switch by re-applying the Istio VirtualService
-5. Locking of the repository
+3. Mapping of the cluster to the directory where the manifests reside.
+4. Set up of `kubectl`
+5. Blue-Green Traffic routing switch by re-applying the Istio VirtualService
+6. Locking of the repository
 
 **Appearance:**
 
@@ -718,7 +721,7 @@ The below workflow with the passed values includes the following steps:
 Click "Run Workflow" and set:
 - **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
 - **Cluster to deploy to:** `{{STANDBY_CLUSTER}}`
-- **Full Configuration commit hash to check out (blank = default branch):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
+- **Full Configuration commit hash to check out (blank = default branch/tag):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
 - **Check this if the common resources need to be applied:** ❌
 - **Check this if the app-blue resources need to be applied:** ❌
 - **Check this if the app-green resources need to be applied:** ❌
@@ -754,10 +757,11 @@ Link: `{{CONFIG_REPO_DOMAIN}}/actions/workflows/deploy.yml`
 The below workflow with the passed values includes the following steps:
 1. Checkout of the passed commit hash
 2. Restoration of the git-crypt symmetric key and unlocking of the repository
-3. Set up of `kubectl`
-4. Application of consul resources, network policies, dedicated gateway resources, database credential secrets, HPA configuration, filebeat configuration, domain claim resources and load balancer resources if opted for.
-5. Application of app-blue/app-green deployments as applicable.
-6. Locking of the repository
+3. Mapping of the cluster to the directory where the manifests reside.
+4. Set up of `kubectl`
+5. Application of consul resources, network policies, dedicated gateway resources, database credential secrets, HPA configuration, filebeat configuration, domain claim resources and load balancer resources if opted for.
+6. Application of app-blue/app-green deployments as applicable.
+7. Locking of the repository
 
 **Appearance:**
 
@@ -766,7 +770,7 @@ The below workflow with the passed values includes the following steps:
 Click "Run Workflow" and set:
 - **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
 - **Cluster to deploy to:** `{{ACTIVE_CLUSTER}}`
-- **Full Configuration commit hash to check out (blank = default branch):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
+- **Full Configuration commit hash to check out (blank = default branch/tag):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
 - **Check this if the common resources need to be applied:** `{{ARE_COMMON_RESOURCES_TO_BE_APPLIED}}`
 - **Check this if the app-blue resources need to be applied:** ✅ if `{{ACTIVE_CLUSTER_ACTIVE_COLOR}}`=green and `{{ACTIVE_CLUSTER_INACTIVE_COLOR}}`=blue; ❌ if `{{ACTIVE_CLUSTER_ACTIVE_COLOR}}`=blue and `{{ACTIVE_CLUSTER_INACTIVE_COLOR}}`=green
 - **Check this if the app-green resources need to be applied:** ✅ if `{{ACTIVE_CLUSTER_ACTIVE_COLOR}}`=blue and `{{ACTIVE_CLUSTER_INACTIVE_COLOR}}`=green; ❌ if `{{ACTIVE_CLUSTER_ACTIVE_COLOR}}`=green and `{{ACTIVE_CLUSTER_INACTIVE_COLOR}}`=blue
@@ -857,7 +861,8 @@ Link: `{{CONFIG_REPO_DOMAIN}}/actions/workflows/smoke-test-dns-api.yml`
 The below workflow with the passed values includes the following steps:
 1. Checkout of the repository
 2. Set up of the Go GitHub Action
-3. Execution of the smoke test with the passed parameters via a Go script (includes create record, update record, get record and delete record)
+3. Disallowance of smoke tests on the standby side if the target environment is either QA or LAB (as they do not have the standby side)
+4. Execution of the smoke test with the passed parameters via a Go script (includes create record, update record, get record and delete record)
 
 **Appearance:**
 
@@ -866,8 +871,8 @@ The below workflow with the passed values includes the following steps:
 Click "Run Workflow" and set:
 - **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
 - **Target Environment:** `{{ENV}}`
-- **Side to smoke test against (Color - blue or green) (choose either if the target is the QA environment as this value is irrelevant there):** `{{ACTIVE_CLUSTER_INACTIVE_COLOR}}`
 - **Cluster to smoke test against (QA and LAB have no Standby cluster — use ACTIVE there):** `ACTIVE`
+- **Side to smoke test against (Color - blue or green) (choose either if the target is the QA environment as this value is irrelevant there):** `{{ACTIVE_CLUSTER_INACTIVE_COLOR}}`
 - **OneCloud tenant to smoke test against:** `{{TENANT}}`
 - **DNS zone to create the record under, e.g. <tenant>.<az>.dcnw.rakuten., <subdomain>.jp.local., etc.:** `{{ZONE}}`
 - **Record type:** `Address`
@@ -902,9 +907,10 @@ Link: `{{CONFIG_REPO_DOMAIN}}/actions/workflows/deploy.yml`
 The below workflow with the passed values includes the following steps:
 1. Checkout of the passed commit hash
 2. Restoration of the git-crypt symmetric key and unlocking of the repository
-3. Set up of `kubectl`
-4. Blue-Green Traffic routing switch by re-applying the Istio VirtualService
-5. Locking of the repository
+3. Mapping of the cluster to the directory where the manifests reside.
+4. Set up of `kubectl`
+5. Blue-Green Traffic routing switch by re-applying the Istio VirtualService
+6. Locking of the repository
 
 **Appearance:**
 
@@ -913,7 +919,7 @@ The below workflow with the passed values includes the following steps:
 Click "Run Workflow" and set:
 - **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
 - **Cluster to deploy to:** `{{ACTIVE_CLUSTER}}`
-- **Full Configuration commit hash to check out (blank = default branch):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
+- **Full Configuration commit hash to check out (blank = default branch/tag):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
 - **Check this if the common resources need to be applied:** ❌
 - **Check this if the app-blue resources need to be applied:** ❌
 - **Check this if the app-green resources need to be applied:** ❌
@@ -976,7 +982,7 @@ The below workflow with the passed values includes the following steps:
 Click "Run Workflow" and set:
 - **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
 - **Target environment:** `{{ENV}}`
-- **Full Configuration commit hash to check out (blank = default branch):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
+- **Full Configuration commit hash to check out (blank = default branch/tag):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
 - **Roll back to this migration version, e.g. 5 to undo everything after V005:** `{{SCHEMA_MIGRATION_FILE_COUNT_AS_IS}}`
 
 **Expected Result:** The GitHub Actions workflow run completes successfully. A sample of the output is shown below:
@@ -1009,7 +1015,7 @@ The below workflow with the passed values includes the following steps:
 Click "Run Workflow" and set:
 - **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
 - **Target environment:** `{{ENV}}`
-- **Full Configuration commit hash to check out (blank = default branch):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
+- **Full Configuration commit hash to check out (blank = default branch/tag):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
 - **Path to the CQL file to apply, relative to the repository root** `{{DB_ROLLBACK_PATCH_FILE_PATH}}`
 
 **Expected Result:** Success.
@@ -1023,11 +1029,12 @@ Link: `{{CONFIG_REPO_DOMAIN}}/actions/workflows/deploy.yml`
 The below workflow with the passed values includes the following steps:
 1. Checkout of the passed commit hash
 2. Restoration of the git-crypt symmetric key and unlocking of the repository
-3. Set up of `kubectl`
-4. Application of consul resources, network policies, dedicated gateway resources, database credential secrets, HPA configuration, filebeat configuration, domain claim resources and load balancer resources if opted for.
-5. Application of app-blue/app-green deployments as applicable.
-6. Blue-Green Traffic routing switch by re-applying the Istio VirtualService if opted for
-7. Locking of the repository
+3. Mapping of the cluster to the directory where the manifests reside.
+4. Set up of `kubectl`
+5. Application of consul resources, network policies, dedicated gateway resources, database credential secrets, HPA configuration, filebeat configuration, domain claim resources and load balancer resources if opted for.
+6. Application of app-blue/app-green deployments as applicable.
+7. Blue-Green Traffic routing switch by re-applying the Istio VirtualService if opted for
+8. Locking of the repository
 
 **Appearance:**
 
@@ -1036,7 +1043,7 @@ The below workflow with the passed values includes the following steps:
 Click "Run Workflow" and set:
 - **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
 - **Cluster to deploy to:** `{{ACTIVE_CLUSTER}}`/`{{STANDBY_CLUSTER}}` as applicable
-- **Full Configuration commit hash to check out (blank = default branch):** `{{CONFIG_ROLLBACK_COMMIT_HASH}}`
+- **Full Configuration commit hash to check out (blank = default branch/tag):** `{{CONFIG_ROLLBACK_COMMIT_HASH}}`
 - **Check this if the common resources need to be applied:** ✅ or ❌ as necessary
 - **Check this if the app-blue resources need to be applied:** ✅ or ❌ as necessary
 - **Check this if the app-green resources need to be applied:** ✅ or ❌ as necessary
@@ -1093,7 +1100,8 @@ Link: `{{CONFIG_REPO_DOMAIN}}/actions/workflows/smoke-test-dns-api.yml`
 The below workflow with the passed values includes the following steps:
 1. Checkout of the repository
 2. Set up of the Go GitHub Action
-3. Execution of the smoke test with the passed parameters via a Go script (includes create record, update record, get record and delete record)
+3. Disallowance of smoke tests on the standby side if the target environment is either QA or LAB (as they do not have the standby side)
+4. Execution of the smoke test with the passed parameters via a Go script (includes create record, update record, get record and delete record)
 
 **Appearance:**
 
@@ -1102,8 +1110,8 @@ The below workflow with the passed values includes the following steps:
 Click "Run Workflow" and set:
 - **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
 - **Target Environment:** `{{ENV}}`
-- **Side to smoke test against (Color - blue or green) (choose either if the target is the QA environment as this value is irrelevant there):** `{{ACTIVE_CLUSTER_INACTIVE_COLOR}}` or `{{STANDBY_CLUSTER_INACTIVE_COLOR}}` as necessary
 - **Cluster to smoke test against (QA and LAB have no Standby cluster — use ACTIVE there):** `ACTIVE` or `STANDBY` as necessary
+- **Side to smoke test against (Color - blue or green) (choose either if the target is the QA environment as this value is irrelevant there):** `{{ACTIVE_CLUSTER_INACTIVE_COLOR}}` or `{{STANDBY_CLUSTER_INACTIVE_COLOR}}` as necessary
 - **OneCloud tenant to smoke test against:** `{{TENANT}}`
 - **DNS zone to create the record under, e.g. <tenant>.<az>.dcnw.rakuten., <subdomain>.jp.local., etc.:** `{{ZONE}}`
 - **Record type:** `Address`

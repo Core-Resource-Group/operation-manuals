@@ -365,7 +365,7 @@ The below workflow with the passed values includes the following steps:
 Click "Run Workflow" and set:
 - **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
 - **Cluster to apply to:** `{{ACTIVE_CLUSTER}}`
-- **Full Configuration commit hash to check out (blank = default branch):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
+- **Full Configuration commit hash to check out (blank = default branch/tag):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
 - **Path to the Kubernetes manifest YAML to apply, relative to the repository root:** `{{K8S_TEMPORARY_MANIFEST_FILE_PATH}}`
 
 **Expected Result:** Success.
@@ -405,7 +405,7 @@ The below workflow with the passed values includes the following steps:
 Click "Run Workflow" and set:
 - **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
 - **Cluster to apply to:** `{{STANDBY_CLUSTER}}`
-- **Full Configuration commit hash to check out (blank = default branch):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
+- **Full Configuration commit hash to check out (blank = default branch/tag):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
 - **Path to the Kubernetes manifest YAML to apply, relative to the repository root:** `{{K8S_TEMPORARY_MANIFEST_FILE_PATH}}`
 
 **Expected Result:** Success.
@@ -447,7 +447,7 @@ The below workflow with the passed values includes the following steps:
 Click "Run Workflow" and set:
 - **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
 - **Target environment:** `{{ENV}}`
-- **Full Configuration commit hash to check out (blank = default branch):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
+- **Full Configuration commit hash to check out (blank = default branch/tag):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
 - **Path to the CQL file to apply, relative to the repository root:** `{{DB_PATCH_FILE_PATH}}`
 
 **Expected Result:** Success.
@@ -487,7 +487,7 @@ The below workflow with the passed values includes the following steps:
 After 5 minutes, Click "Run Workflow" and set:
 - **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
 - **Cluster to apply to:** `{{ACTIVE_CLUSTER}}`
-- **Full Configuration commit hash to check out (blank = default branch):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
+- **Full Configuration commit hash to check out (blank = default branch/tag):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
 - **Path to the Kubernetes manifest YAML to apply, relative to the repository root:** `{{K8S_MANIFEST_FILE_PATH}}`
 
 **Expected Result:** Success.
@@ -527,7 +527,7 @@ The below workflow with the passed values includes the following steps:
 Click "Run Workflow" and set:
 - **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
 - **Cluster to apply to:** `{{STANDBY_CLUSTER}}`
-- **Full Configuration commit hash to check out (blank = default branch):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
+- **Full Configuration commit hash to check out (blank = default branch/tag):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
 - **Path to the Kubernetes manifest YAML to apply, relative to the repository root:** `{{K8S_MANIFEST_FILE_PATH}}`
 
 **Expected Result:** Success.
@@ -563,7 +563,8 @@ Link: `{{CONFIG_REPO_DOMAIN}}/actions/workflows/smoke-test-dns-api.yml`
 The below workflow with the passed values includes the following steps:
 1. Checkout of the repository
 2. Set up of the Go GitHub Action
-3. Execution of the smoke test with the passed parameters via a Go script (includes create record, update record, get record and delete record)
+3. Disallowance of smoke tests on the standby side if the target environment is either QA or LAB (as they do not have the standby side)
+4. Execution of the smoke test with the passed parameters via a Go script (includes create record, update record, get record and delete record)
 
 **Appearance:**
 
@@ -572,8 +573,8 @@ The below workflow with the passed values includes the following steps:
 Click "Run Workflow" and set:
 - **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
 - **Target Environment:** `{{ENV}}`
-- **Side to smoke test against (Color - blue or green) (choose either if the target is the QA environment as this value is irrelevant there):** `{{ACTIVE_CLUSTER_ACTIVE_COLOR}}`
 - **Cluster to smoke test against (QA and LAB have no Standby cluster — use ACTIVE there):** `ACTIVE`
+- **Side to smoke test against (Color - blue or green) (choose either if the target is the QA environment as this value is irrelevant there):** `{{ACTIVE_CLUSTER_ACTIVE_COLOR}}`
 - **OneCloud tenant to smoke test against:** `{{TENANT}}`
 - **DNS zone to create the record under, e.g. <tenant>.<az>.dcnw.rakuten., <subdomain>.jp.local., etc.:** `{{ZONE}}`
 - **Record type:** `Address`
@@ -633,7 +634,7 @@ The below workflow with the passed values includes the following steps:
 Click "Run Workflow" and set:
 - **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
 - **Cluster to apply to:** `{{ACTIVE_CLUSTER}}`
-- **Full Configuration commit hash to check out (blank = default branch):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
+- **Full Configuration commit hash to check out (blank = default branch/tag):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
 - **Path to the Kubernetes manifest YAML to apply, relative to the repository root:** `{{K8S_TEMPORARY_MANIFEST_FILE_PATH}}`
 
 **Expected Result:** Success.
@@ -659,7 +660,7 @@ The below workflow with the passed values includes the following steps:
 Click "Run Workflow" and set:
 - **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
 - **Cluster to apply to:** `{{STANDBY_CLUSTER}}`
-- **Full Configuration commit hash to check out (blank = default branch):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
+- **Full Configuration commit hash to check out (blank = default branch/tag):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
 - **Path to the Kubernetes manifest YAML to apply, relative to the repository root:** `{{K8S_TEMPORARY_MANIFEST_FILE_PATH}}`
 
 **Expected Result:** Success.
@@ -689,7 +690,7 @@ The below workflow with the passed values includes the following steps:
 Click "Run Workflow" and set:
 - **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
 - **Target environment:** `{{ENV}}`
-- **Full Configuration commit hash to check out (blank = default branch):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
+- **Full Configuration commit hash to check out (blank = default branch/tag):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
 - **Path to the CQL file to apply, relative to the repository root:** `{{DB_ROLLBACK_PATCH_FILE_PATH}}`
 
 **Expected Result:** Success.
@@ -715,7 +716,7 @@ The below workflow with the passed values includes the following steps:
 After 5 minutes, Click "Run Workflow" and set:
 - **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
 - **Cluster to apply to:** `{{ACTIVE_CLUSTER}}`
-- **Full Configuration commit hash to check out (blank = default branch):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
+- **Full Configuration commit hash to check out (blank = default branch/tag):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
 - **Path to the Kubernetes manifest YAML to apply, relative to the repository root:** `{{K8S_ROLLBACK_MANIFEST_FILE_PATH}}`
 
 **Expected Result:** Success.
@@ -741,7 +742,7 @@ The below workflow with the passed values includes the following steps:
 Click "Run Workflow" and set:
 - **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
 - **Cluster to apply to:** `{{STANDBY_CLUSTER}}`
-- **Full Configuration commit hash to check out (blank = default branch):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
+- **Full Configuration commit hash to check out (blank = default branch/tag):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
 - **Path to the Kubernetes manifest YAML to apply, relative to the repository root:** `{{K8S_ROLLBACK_MANIFEST_FILE_PATH}}`
 
 **Expected Result:** Success.
@@ -763,7 +764,8 @@ Link: `{{CONFIG_REPO_DOMAIN}}/actions/workflows/smoke-test-dns-api.yml`
 The below workflow with the passed values includes the following steps:
 1. Checkout of the repository
 2. Set up of the Go GitHub Action
-3. Execution of the smoke test with the passed parameters via a Go script (includes create record, update record, get record and delete record)
+3. Disallowance of smoke tests on the standby side if the target environment is either QA or LAB (as they do not have the standby side)
+4. Execution of the smoke test with the passed parameters via a Go script (includes create record, update record, get record and delete record)
 
 **Appearance:**
 
@@ -772,8 +774,8 @@ The below workflow with the passed values includes the following steps:
 Click "Run Workflow" and set:
 - **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
 - **Target Environment:** `{{ENV}}`
-- **Side to smoke test against (Color - blue or green) (choose either if the target is the QA environment as this value is irrelevant there):** `{{ACTIVE_CLUSTER_ACTIVE_COLOR}}`
 - **Cluster to smoke test against (QA and LAB have no Standby cluster — use ACTIVE there):** `ACTIVE`
+- **Side to smoke test against (Color - blue or green) (choose either if the target is the QA environment as this value is irrelevant there):** `{{ACTIVE_CLUSTER_ACTIVE_COLOR}}`
 - **OneCloud tenant to smoke test against:** `{{TENANT}}`
 - **DNS zone to create the record under, e.g. <tenant>.<az>.dcnw.rakuten., <subdomain>.jp.local., etc.:** `{{ZONE}}`
 - **Record type:** `Address`
