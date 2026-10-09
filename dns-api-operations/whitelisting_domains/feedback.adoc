@@ -1,0 +1,126 @@
+= DNS domain whitelisting template feedback
+
+.Notes
+* "GMS" in templates' Classification & Risk Assessment refers to "Gross Merchant Sales". "GMS Impact" is anything that might directory _or indirectly_ impact customer-facing services, causing outages and/or service disruption.
+
+.General Feedback
+* TASC Reviewers *MUST* be granted access to the operational codebases for review. Operational code is expected to live on-premise, generally on the company's standard BitBucket service. Not all Reviewers have GHC or even GHE access.
+* Anywhere commands are being run and checks are recording correct behaviour of the system (e.g. Step 4), evidence *MUST* be captured, which MUST be recorded on the CM ticket for the Operation (redacted if required for confidentiality). Details of what evidence to capture needs to be provided in the relevant steps, along with clear examples. For text-commands, copy/paste of text output is acceptable. For UI usage, screenshosts are acceptable.
+
+.Specific Feedback
+|===
+| Section | Item | Notes
+
+| 1. Summary
+| Summary + Details
+| Do not use the term "etc." here. Statements can be simplified to "Whitelisting of domains based in input Availability Zones."
+
+| -
+| Operaton Code
+| Links required for operation code repositories (non-variable). Links need to point to the specific commit to be used 
+
+| 2. Classification & Risk Assessment
+| Risk level, GMS impact, data issue
+| Variables there need replacing with actual values.
+
+| -
+| GMS Impact
+| (see note on GMS definition). If the actually-running DNS service is independant of the API components, impacts may be much lower. If the API service _is itself_ the DNS service, then anything with potential for disruption is much higher risk, due to the low-level nature of 
+
+| -
+| External dependency
+| If no dependencies on other teams/systems, can leave the note as something to the effect of "Internal-only operation, no other dependencies".
+
+| 4. Variable Parameters
+| Items for removal
+| Risk level, user impact
+
+| -
+| Missing examples
+| Wherever reasonably possible, replace `N/A` with examples.
+
+| -
+| Account credentials (account names)
+| 
+
+| 5. Communication & Announcements
+| Missing announcement
+| CPSD CM rules require operation announcements on fixed Viber channel/chat (details of channel available in latest Change Management training on GROW).
+
+| -
+| CRG announcement doc
+| If the CRG announcements document is ready on Confluence, it should be linked to here.
+
+| 7. Login & Access Procedures
+| "Login"
+| Login steps should be replaced with script that encapsulates the curl-call, and extraction and validation of bearer token. Script should request credentials as prompt and pass to curl via variable, not interpolated into string (prevent logging into system audit logs). Recommendation: short python script that can be re-used in app-release template.
+
+| 8. Pre-Execution Checklist
+| Missing check
+| All data patch scripts specific to the Operation should be verified as correct, and ideally stored in an appropriate version-controlled location for retrieval at operation time.
+
+| 9. Buddy Role
+| Buddy role.
+| Buddy role should be empowered to halt and trigger rollback without need for escalation to L3/L4. All required decision-making criteria for go/no-go checks, rollback, etc. should be clearly and unambiguously stated at each relevant stage. "Escalation" criteria should only be relevant for operations with risk of impact to other systems.
+
+| 11. Operations Procedure
+| Missing step
+| Enabling Maintenance Mode step appears missing. Any system requiring being put into "maintenance mode" should be done so, and verified, prior to initiating operation changes.
+
+| -
+| Step 1
+| This step should be captured to a script, to run the process (apply patch, validate changes, etc.)
+
+| -
+| Step 1
+| Configuration appears to be stored in the same repo alongside the operational code. Configuration should be extracted to a separate, dedicated repository, and retrieved as part of the release process. Operation code needs to be fixed and verified at a specific state as part of the templating process, which is then used in all operations using current version of the template. Template + Op. Code are expected to share a lifecycle, which is expected to be separate to that of operation inputs (config changes, data patches, etc.)
+
+|
+| Step 2.3
+| Checking health: be specific about exactly which endpoint to check, not a choice. Example uses `/health`, so recommend that one. If `/metrics` has important information to check as well, include that as well along with keys to check.
+
+|
+| Step 2.4
+| This is far too vague, and appears to be instruction to make some form of change. If making an optional change, the decision criteria need to be explicitly stated along with exact instructions to follow. This should be promoted to a full operation step if it is not strictly a read-only validation sub-step.
+
+|
+| Step 3
+| (convert to script, see above about scripted login)
+
+|
+| Step 4, smoke-testing
+| (convert to script, see above about scripted login)
+
+|
+| Step 4 Variables
+| All variables must be declared in section "4. Variable Parameters", to be populated from the operation ticket.
+
+| 12. Rollback Procedure
+| Initial details
+| All details required to make a rollback judgement must be available in the operation template, sufficiently clear for any operator to make the appropriate judgement(s) and execute without need for escalation.
+
+| -
+| Rollback Checks
+| Repeat comment about script to fetch + validate auth token; also include following API calls with clear output logging for op. ticket records.
+
+| 13. Post-Operation Monitoring
+| Monitoring duration
+| Needs to be fixed value, not variable.
+
+| -
+| Sign-off/evidence
+| Not just op. completion evidence, but pre-execution and process evidence needs to be captured and recorded on the op. ticket.
+
+| 14. Test Evidence
+| Missing evidence (op procedures)
+| Process test evidence must be provided for approval. If not possible in a matching/equivalent pre-production environment, there are some limited alternatives allowed.
+
+| -
+| Missing evidence (rollback)
+| Rollback Process test evidence from an appropriate pre-production/validation environment should also be provided, if possible. (Required within 6-months of template approval, if not immediately available).
+
+| 15. Known Risks & Improvements
+| Suggested improvement to add
+| Wrap all functionality and tests into a Jenkins (or similar) pipeline (so inputs are simply the list of AZs/etc. to whitelist), with automated capture of all steps' evidence, health/state verification, rollback, etc.
+
+|===

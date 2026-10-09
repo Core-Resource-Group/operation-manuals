@@ -1,0 +1,1579 @@
+Date: Thu, 1 Oct 2026 12:34:53 +0900 (JST)
+Message-ID: <575830478.78302.1790825693518@pcnfap-yok102.intra.rakuten.co.jp>
+Subject: Exported From Confluence
+MIME-Version: 1.0
+Content-Type: multipart/related; 
+	boundary="----=_Part_78301_357422063.1790825693516"
+
+------=_Part_78301_357422063.1790825693516
+Content-Type: text/html; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+Content-Location: file:///C:/exported.html
+
+<html xmlns:o=3D'urn:schemas-microsoft-com:office:office'
+      xmlns:w=3D'urn:schemas-microsoft-com:office:word'
+      xmlns:v=3D'urn:schemas-microsoft-com:vml'
+      xmlns=3D'urn:w3-org-ns:HTML'>
+<head>
+    <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8=
+">
+    <title>[BMaaS] Standard Release Procedure (BDD)</title>
+    <!--[if gte mso 9]>
+    <xml>
+        <o:OfficeDocumentSettings>
+            <o:TargetScreenSize>1024x640</o:TargetScreenSize>
+            <o:PixelsPerInch>72</o:PixelsPerInch>
+            <o:AllowPNG/>
+        </o:OfficeDocumentSettings>
+        <w:WordDocument>
+            <w:View>Print</w:View>
+            <w:Zoom>90</w:Zoom>
+            <w:DoNotOptimizeForBrowser/>
+        </w:WordDocument>
+    </xml>
+    <![endif]-->
+    <style>
+                <!--
+        @page Section1 {
+            size: 8.5in 11.0in;
+            margin: 1.0in;
+            mso-header-margin: .5in;
+            mso-footer-margin: .5in;
+            mso-paper-source: 0;
+        }
+
+        table {
+            border: solid 1px;
+            border-collapse: collapse;
+        }
+
+        table td, table th {
+            border: solid 1px;
+            padding: 5px;
+        }
+
+        td {
+            page-break-inside: avoid;
+        }
+
+        tr {
+            page-break-after: avoid;
+        }
+
+        div.Section1 {
+            page: Section1;
+        }
+
+        /* Confluence print stylesheet. Common to all themes for print medi=
+a */
+/* Full of !important until we improve batching for print CSS */
+
+@media print {
+    #main {
+        padding-bottom: 1em !important; /* The default padding of 6em is to=
+o much for printouts */
+    }
+
+    body {
+        font-family: Arial, Helvetica, FreeSans, sans-serif;
+        font-size: 10pt;
+        line-height: 1.2;
+    }
+
+    body, #full-height-container, #main, #page, #content, .has-personal-sid=
+ebar #content {
+        background: var(--ds-surface, #fff) !important;
+        color: var(--ds-text, #000) !important;
+        border: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: block !important;
+    }
+
+    a, a:link, a:visited, a:focus, a:hover, a:active {
+        color: var(--ds-link-pressed, #000);
+    }
+
+    #content h1,
+    #content h2,
+    #content h3,
+    #content h4,
+    #content h5,
+    #content h6 {
+        font-family: Arial, Helvetica, FreeSans, sans-serif;
+        page-break-after: avoid;
+    }
+
+    pre {
+        font-family: Monaco, "Courier New", monospace;
+    }
+
+    #header,
+    .aui-header-inner,
+    #navigation,
+    #sidebar,
+    .sidebar,
+    #personal-info-sidebar,
+    .ia-fixed-sidebar,
+    .page-actions,
+    .navmenu,
+    .ajs-menu-bar,
+    .noprint,
+    .inline-control-link,
+    .inline-control-link a,
+    a.show-labels-editor,
+    .global-comment-actions,
+    .comment-actions,
+    .quick-comment-container,
+    #addcomment {
+        display: none !important;
+    }
+
+    /* CONF-28544 cannot print multiple pages in IE */
+    #splitter-content {
+        position: relative !important;
+    }
+
+    .comment .date::before {
+        content: none !important; /* remove middot for print view */
+    }
+
+    h1.pagetitle img {
+        height: auto;
+        width: auto;
+    }
+
+    .print-only {
+        display: block;
+    }
+
+    #footer {
+        position: relative !important; /* CONF-17506 Place the footer at en=
+d of the content */
+        margin: 0;
+        padding: 0;
+        background: none;
+        clear: both;
+    }
+
+    #poweredby {
+        border-top: none;
+        background: none;
+    }
+
+    #poweredby li.print-only {
+        display: list-item;
+        font-style: italic;
+    }
+
+    #poweredby li.noprint {
+        display: none;
+    }
+
+    /* no width controls in print */
+    .wiki-content .table-wrap,
+    .wiki-content p,
+    .panel .codeContent,
+    .panel .codeContent pre,
+    .image-wrap {
+        overflow: visible !important;
+    }
+
+    /* TODO - should this work? */
+    #children-section,
+    #comments-section .comment,
+    #comments-section .comment .comment-body,
+    #comments-section .comment .comment-content,
+    #comments-section .comment p {
+        page-break-inside: avoid;
+    }
+
+    #page-children a {
+        text-decoration: none;
+    }
+
+    /**
+     hide twixies
+
+     the specificity here is a hack because print styles
+     are getting loaded before the base styles. */
+    #comments-section.pageSection .section-header,
+    #comments-section.pageSection .section-title,
+    #children-section.pageSection .section-header,
+    #children-section.pageSection .section-title,
+    .children-show-hide {
+        padding-left: 0;
+        margin-left: 0;
+    }
+
+    .children-show-hide.icon {
+        display: none;
+    }
+
+    /* personal sidebar */
+    .has-personal-sidebar #content {
+        margin-right: 0px;
+    }
+
+    .has-personal-sidebar #content .pageSection {
+        margin-right: 0px;
+    }
+
+    .no-print, .no-print * {
+        display: none !important;
+    }
+}
+-->
+    </style>
+</head>
+<body>
+    <h1>[BMaaS] Standard Release Procedure (BDD)</h1>
+    <div class=3D"Section1">
+        <p>
+ <style type=3D"text/css">/*<![CDATA[*/
+div.rbtoc1790825693478 {padding: 0px;}
+div.rbtoc1790825693478 ul {margin-left: 0px;}
+div.rbtoc1790825693478 li {margin-left: 0px;padding-left: 0px;}
+
+/*]]>*/</style></p>
+<div class=3D"toc-macro rbtoc1790825693478">
+ <ul class=3D"toc-indentation">
+  <li><a href=3D"#id-[BMaaS]StandardReleaseProcedure(BDD)-Metadata&amp;Stat=
+us">Metadata &amp; Status</a></li>
+  <li><a href=3D"#id-[BMaaS]StandardReleaseProcedure(BDD)-1.Purpose">1. Pur=
+pose</a></li>
+  <li><a href=3D"#id-[BMaaS]StandardReleaseProcedure(BDD)-2.Scope">2. Scope=
+</a></li>
+  <li><a href=3D"#id-[BMaaS]StandardReleaseProcedure(BDD)-3.Prerequisites&a=
+mp;Requirements">3. Prerequisites &amp; Requirements</a></li>
+  <li><a href=3D"#id-[BMaaS]StandardReleaseProcedure(BDD)-4.Procedure">4. P=
+rocedure</a></li>
+  <li><a href=3D"#id-[BMaaS]StandardReleaseProcedure(BDD)-5.Post-ProcedureC=
+hecks">5. Post-Procedure Checks</a>
+   <ul class=3D"toc-indentation">
+    <li><a href=3D"#id-[BMaaS]StandardReleaseProcedure(BDD)-5.1Monitoring">=
+5.1 Monitoring</a></li>
+    <li><a href=3D"#id-[BMaaS]StandardReleaseProcedure(BDD)-5.2Testing">5.2=
+ Testing</a></li>
+    <li><a href=3D"#id-[BMaaS]StandardReleaseProcedure(BDD)-5.3Finalaccepta=
+ncetestingbyPICofdependedservice">5.3 Final acceptance testing by PIC of de=
+pended service</a></li>
+   </ul></li>
+  <li><a href=3D"#id-[BMaaS]StandardReleaseProcedure(BDD)-6.Troubleshooting=
+CommonIssues">6. Troubleshooting Common Issues</a></li>
+  <li><a href=3D"#id-[BMaaS]StandardReleaseProcedure(BDD)-7.Reporting&amp;E=
+scalationFlow">7. Reporting &amp; Escalation Flow</a>
+   <ul class=3D"toc-indentation">
+    <li><a href=3D"#id-[BMaaS]StandardReleaseProcedure(BDD)-7.1InternalRepo=
+rting">7.1 Internal Reporting</a></li>
+    <li><a href=3D"#id-[BMaaS]StandardReleaseProcedure(BDD)-7.2External/Sta=
+keholderReporting">7.2 External/Stakeholder Reporting</a></li>
+   </ul></li>
+  <li><a href=3D"#id-[BMaaS]StandardReleaseProcedure(BDD)-8.Rollback/Remedi=
+ation">8. Rollback / Remediation</a></li>
+  <li><a href=3D"#id-[BMaaS]StandardReleaseProcedure(BDD)-9.RelatedDocument=
+s&amp;Links">9. Related Documents &amp; Links</a></li>
+  <li><a href=3D"#id-[BMaaS]StandardReleaseProcedure(BDD)-10.RevisionHistor=
+y">10. Revision History</a></li>
+ </ul>
+</div>
+<p></p>
+<h3 class=3D"m_8a5d1357 mantine-Title-root" id=3D"id-[BMaaS]StandardRelease=
+Procedure(BDD)-Metadata&amp;Status"><strong>Metadata &amp; Status</strong><=
+/h3>
+<div class=3D"table-wrap">
+ <table class=3D"relative-table wrapped confluenceTable" style=3D"width: 50=
+.6006%;">
+  <colgroup class=3D"">
+   <col class=3D"" style=3D"width: 50.3733%;">
+   <col class=3D"" style=3D"width: 49.6257%;">
+  </colgroup>
+  <tbody class=3D"">
+   <tr class=3D"">
+    <th class=3D"confluenceTh">SOP Title<span class=3D"mantine-List-itemLab=
+el"><strong>:<br></strong></span><em><span class=3D"mantine-List-itemLabel"=
+>(e.g., Creating a New User Account in Active Directory)</span></em></th>
+    <td class=3D"confluenceTd">[BMaaS] Standard Release Procedure (BDD)</td=
+>
+   </tr>
+   <tr class=3D"">
+    <th class=3D"confluenceTh">
+     <p>SOP ID:<br><em><span class=3D"mantine-List-itemLabel">(e.g., UCP-SO=
+P-UM-001) -&nbsp;Optional, but good for tracking</span></em></p></th>
+    <td class=3D"confluenceTd">UCP-SOP-BMAAS-001</td>
+   </tr>
+   <tr class=3D"">
+    <th class=3D"confluenceTh">
+     <p>Status:</p>
+     <ul class=3D"m_abbac491 mantine-List-root">
+      <li class=3D"m_abb6bec2 mantine-List-item">
+       <p><span class=3D"mantine-List-itemLabel"><span class=3D"aui-lozenge=
+ aui-lozenge-success">Approved</span></span><em><span class=3D"mantine-List=
+-itemLabel">&nbsp;(Ready for use)</span></em></p></li>
+      <li class=3D"m_abb6bec2 mantine-List-item">
+       <p><span class=3D"mantine-List-itemLabel"><span class=3D"aui-lozenge=
+ aui-lozenge-current">Draft</span></span><em><span class=3D"mantine-List-it=
+emLabel">&nbsp;(Under construction)</span></em></p></li>
+      <li class=3D"m_abb6bec2 mantine-List-item">
+       <p><span class=3D"mantine-List-itemLabel"><span class=3D"aui-lozenge=
+ aui-lozenge-error">Under Review</span></span><em><span class=3D"mantine-Li=
+st-itemLabel">&nbsp;(Awaiting approval/feedback)</span></em></p></li>
+      <li class=3D"m_abb6bec2 mantine-List-item">
+       <p><span class=3D"mantine-List-itemLabel"><span class=3D"aui-lozenge=
+">Archived</span></span><em><span class=3D"mantine-List-itemLabel">&nbsp;(N=
+o longer current, but kept for historical reference)</span></em></p></li>
+     </ul></th>
+    <td class=3D"confluenceTd"><span class=3D"mantine-List-itemLabel"><span=
+ class=3D"aui-lozenge aui-lozenge-current">Draft</span></span></td>
+   </tr>
+   <tr class=3D"">
+    <th class=3D"confluenceTh">
+     <p>Version<span class=3D"mantine-List-itemLabel"><strong>:<br></strong=
+></span><em><span class=3D"mantine-List-itemLabel">(e.g., 1.0, 1.1, 2.0)</s=
+pan></em></p></th>
+    <td class=3D"confluenceTd">1.0</td>
+   </tr>
+   <tr class=3D"">
+    <th class=3D"confluenceTh">
+     <p>Last Updated<span class=3D"mantine-List-itemLabel"><strong>:<br></s=
+trong></span><em><span class=3D"mantine-List-itemLabel">(Use&nbsp;<code>/da=
+te</code>&nbsp;macro for easy entry: e.g., 2025-12-16)</span></em></p></th>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p><time datetime=3D"2026-02-10" class=3D"date-past">10 Feb 2026</tim=
+e>&nbsp;</p>
+     </div></td>
+   </tr>
+   <tr class=3D"">
+    <th class=3D"confluenceTh">
+     <p>Author(s)<span class=3D"mantine-List-itemLabel"><strong>:<br></stro=
+ng></span><em><span class=3D"mantine-List-itemLabel">(Use&nbsp;<code>@</cod=
+e>&nbsp;mention for user profiles: e.g., @Jane Doe)</span></em></p></th>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p><a class=3D"confluence-userlink user-mention" data-username=3D"lun=
+.xu" href=3D"/confluence/display/~lun.xu" data-linked-resource-id=3D"620625=
+940" data-linked-resource-version=3D"2" data-linked-resource-type=3D"userin=
+fo" data-base-url=3D"https://confluence.rakuten-it.com/confluence">Xu, Lun =
+| Leon | CLSD</a>&nbsp;</p>
+     </div></td>
+   </tr>
+   <tr class=3D"">
+    <th class=3D"confluenceTh">
+     <p>Reviewer(s)<span class=3D"mantine-List-itemLabel"><strong>:<br></st=
+rong></span><em><span class=3D"mantine-List-itemLabel">(Use&nbsp;<code>@</c=
+ode>&nbsp;mention for user profiles: e.g., @John Smith)</span></em></p></th=
+>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p><a class=3D"confluence-userlink user-mention" data-username=3D"ryo=
+.kimura" href=3D"/confluence/display/~ryo.kimura" data-linked-resource-id=
+=3D"1966231" data-linked-resource-version=3D"2" data-linked-resource-type=
+=3D"userinfo" data-base-url=3D"https://confluence.rakuten-it.com/confluence=
+">Kimura, Ryo | Ryo | CLSD</a>&nbsp;</p>
+      <p><a class=3D"confluence-userlink user-mention" data-username=3D"lun=
+.xu" href=3D"/confluence/display/~lun.xu" data-linked-resource-id=3D"620625=
+940" data-linked-resource-version=3D"2" data-linked-resource-type=3D"userin=
+fo" data-base-url=3D"https://confluence.rakuten-it.com/confluence">Xu, Lun =
+| Leon | CLSD</a>&nbsp;</p>
+      <p><a class=3D"confluence-userlink user-mention" data-username=3D"sas=
+cha.duschen" href=3D"/confluence/display/~sascha.duschen" data-linked-resou=
+rce-id=3D"1005452743" data-linked-resource-version=3D"3" data-linked-resour=
+ce-type=3D"userinfo" data-base-url=3D"https://confluence.rakuten-it.com/con=
+fluence">Duschen, Sascha | Sascha | CLSD</a>&nbsp;</p>
+     </div></td>
+   </tr>
+   <tr class=3D"">
+    <th class=3D"confluenceTh">
+     <p>Approval Date<span class=3D"mantine-List-itemLabel"><strong>:<br></=
+strong></span><em><span>(Use</span><span>&nbsp;</span><code>/date</code><sp=
+an>&nbsp;</span><span>macro)</span></em></p></th>
+    <td class=3D"confluenceTd"><br></td>
+   </tr>
+  </tbody>
+ </table>
+</div>
+<p><br></p>
+<hr>
+<h3 class=3D"m_8a5d1357 mantine-Title-root" id=3D"id-[BMaaS]StandardRelease=
+Procedure(BDD)-1.Purpose"><strong>1. Purpose</strong></h3>
+<p class=3D"mantine-focus-auto m_b6d8b162 mantine-Text-root">Clearly state =
+the objective of this SOP. Why does it exist? What outcome does it achieve?=
+</p>
+<div class=3D"panel" style=3D"border-width: 1px;">
+ <div class=3D"panelContent">
+  <p class=3D"mantine-focus-auto m_b6d8b162 mantine-Text-root">The purpose =
+of this Standard Operating Procedure (SOP) is to define the standardized pr=
+ocess for releasing new BMaaS application versions to target environments. =
+This ensures consistent, controlled, and auditable deployments, minimizing =
+risks and maximizing service availability and quality.</p>
+ </div>
+</div>
+<p><br></p>
+<hr>
+<h3 class=3D"m_8a5d1357 mantine-Title-root" id=3D"id-[BMaaS]StandardRelease=
+Procedure(BDD)-2.Scope"><strong>2. Scope</strong></h3>
+<p class=3D"mantine-focus-auto m_b6d8b162 mantine-Text-root">Define what th=
+is SOP covers and, if necessary, what it explicitly<span>&nbsp;</span><em>d=
+oes not</em><span>&nbsp;</span>cover. Who should use it? Which systems, app=
+lications, or scenarios are included?</p>
+<div class=3D"panel" style=3D"border-width: 1px;">
+ <div class=3D"panelContent">
+  <p class=3D"mantine-focus-auto m_b6d8b162 mantine-Text-root">This Standar=
+d Operating Manual specifically covers the deployment processes for the<spa=
+n>&nbsp;</span><strong>BMaaS applications</strong>.</p>
+  <p class=3D"mantine-focus-auto m_b6d8b162 mantine-Text-root">The manual a=
+pplies to deployments targeting the<span>&nbsp;</span><strong>BDD Environme=
+nt (HND1 and HND2)</strong>.</p>
+  <p class=3D"mantine-focus-auto m_b6d8b162 mantine-Text-root">It provides =
+standardized procedures for&nbsp;<span style=3D"margin: 0.0px;padding: 0.0p=
+x;"><strong>deployment execution, post-deployment verification, and rollbac=
+k </strong></span>for the BMaaS applications.</p>
+  <p class=3D"mantine-focus-auto m_b6d8b162 mantine-Text-root">The primary =
+audience for this manual is<span>&nbsp;</span><strong>DevOps engineers</str=
+ong><span>&nbsp;</span>responsible for operational deployment tasks.</p>
+  <p class=3D"mantine-focus-auto m_b6d8b162 mantine-Text-root"><strong>Expl=
+icitly out of scope</strong><span>&nbsp;</span>for this manual are:</p>
+  <ul class=3D"m_abbac491 mantine-List-root">
+   <li class=3D"m_abb6bec2 mantine-List-item">
+    <p><span class=3D"mantine-List-itemLabel">Pre-deployment checks (these =
+are assumed to be completed prior to initiating the procedures in this manu=
+al).</span></p></li>
+   <li class=3D"m_abb6bec2 mantine-List-item">
+    <p><span class=3D"mantine-List-itemLabel">Individual application featur=
+e testing (this occurs as part of the development and QA lifecycle).</span>=
+</p></li>
+   <li class=3D"m_abb6bec2 mantine-List-item">
+    <p><span class=3D"mantine-List-itemLabel">Incident response for post-de=
+ployment application failures that are unrelated to the deployment process =
+itself (these are handled by separate incident management protocols).</span=
+></p></li>
+  </ul>
+  <p class=3D"mantine-focus-auto m_b6d8b162 mantine-Text-root">The procedur=
+es documented&nbsp;<span style=3D"margin: 0.0px;padding: 0.0px;">in this ma=
+nual leverage existing&nbsp;<strong>CI/CD pipelines, with Jenkins</strong>&=
+nbsp;for orchestration and&nbsp;<strong>Chef (chef-client</strong></span><s=
+trong>)</strong><span>&nbsp;</span>for configuration management.</p>
+ </div>
+</div>
+<p><br></p>
+<hr>
+<h3 class=3D"m_8a5d1357 mantine-Title-root" id=3D"id-[BMaaS]StandardRelease=
+Procedure(BDD)-3.Prerequisites&amp;Requirements"><strong>3. Prerequisites &=
+amp; Requirements</strong></h3>
+<p class=3D"mantine-focus-auto m_b6d8b162 mantine-Text-root">List everythin=
+g that must be in place or completed<span>&nbsp;</span><em>before</em><span=
+>&nbsp;</span>starting this procedure.</p>
+<div class=3D"panel" style=3D"border-width: 1px;">
+ <div class=3D"panelContent">
+  <p class=3D"mantine-focus-auto m_b6d8b162 mantine-Text-root"><strong>3.1.=
+ Manual Creation &amp; Development Requirements:</strong></p>
+  <ul class=3D"m_abbac491 mantine-List-root">
+   <li class=3D"m_abb6bec2 mantine-List-item">
+    <p><span class=3D"mantine-List-itemLabel"><strong>Access to Jenkins pip=
+eline configurations:</strong><span>&nbsp;</span>For documenting the automa=
+ted deployment steps and ensuring accuracy.</span></p></li>
+  </ul>
+  <p class=3D"mantine-focus-auto m_b6d8b162 mantine-Text-root"><strong>3.2.=
+ User (DevOps Engineer) Prerequisites:</strong></p>
+  <ul class=3D"m_abbac491 mantine-List-root">
+   <li class=3D"m_abb6bec2 mantine-List-item">
+    <p><span class=3D"mantine-List-itemLabel"><strong>Familiarity with Jenk=
+ins:</strong><span>&nbsp;</span>Users must be proficient in navigating and =
+interacting with the Jenkins CI/CD platform.</span></p></li>
+   <li class=3D"m_abb6bec2 mantine-List-item">
+    <p><span class=3D"mantine-List-itemLabel"><strong>Understanding of Chef=
+:</strong><span>&nbsp;</span>Users should have a working knowledge of Chef,=
+ including recipe execution and configuration management principles.</span>=
+</p></li>
+   <li class=3D"m_abb6bec2 mantine-List-item">
+    <p><span class=3D"mantine-List-itemLabel"><strong>Basic Linux Command-L=
+ine Proficiency:</strong><span>&nbsp;</span>Essential for server interactio=
+n, log analysis, and troubleshooting.</span></p></li>
+   <li class=3D"m_abb6bec2 mantine-List-item">
+    <p><span class=3D"mantine-List-itemLabel"><strong>Knowledge of BMaaS Ap=
+plication Architecture:</strong><span>&nbsp;</span>Users must understand th=
+e fundamental components, dependencies, and operational characteristics of =
+the BMaaS applications.</span></p></li>
+  </ul>
+  <p class=3D"mantine-focus-auto m_b6d8b162 mantine-Text-root"><strong>3.3.=
+ Execution Access &amp; Permissions:</strong></p>
+  <ul class=3D"m_abbac491 mantine-List-root">
+   <li class=3D"m_abb6bec2 mantine-List-item">
+    <p><span class=3D"mantine-List-itemLabel"><strong>Jenkins Job Execution=
+ Permissions:</strong><span>&nbsp;</span>Required to initiate and manage de=
+ployment pipelines.</span></p></li>
+   <li class=3D"m_abb6bec2 mantine-List-item"><span class=3D"mantine-List-i=
+temLabel"><strong>Sudo Privileges for Chef-Client Execution:</strong><span>=
+&nbsp;</span>Essential for applying configurations and managing services vi=
+a Chef.</span></li>
+  </ul>
+  <p class=3D"mantine-focus-auto m_b6d8b162 mantine-Text-root"><strong>3.4.=
+ Infrastructure &amp; Tooling Requirements:</strong></p>
+  <ul class=3D"m_abbac491 mantine-List-root">
+   <li class=3D"m_abb6bec2 mantine-List-item">
+    <p><span class=3D"mantine-List-itemLabel"><strong>Operational Jenkins S=
+erver:</strong><span>&nbsp;</span>The central CI/CD platform must be fully =
+functional and accessible.</span></p></li>
+   <li class=3D"m_abb6bec2 mantine-List-item">
+    <p><span class=3D"mantine-List-itemLabel"><strong>Configured Chef Serve=
+r/Clients:</strong><span>&nbsp;</span>The Chef infrastructure must be opera=
+tional and correctly configured to manage the target environments.</span></=
+p></li>
+  </ul>
+  <p class=3D"mantine-focus-auto m_b6d8b162 mantine-Text-root"><strong>3.5.=
+ Manual Maintenance &amp; Review:</strong></p>
+  <ul class=3D"m_abbac491 mantine-List-root">
+   <li class=3D"m_abb6bec2 mantine-List-item">
+    <p><span class=3D"mantine-List-itemLabel"><strong>Annual Review Cycle:<=
+/strong><span>&nbsp;</span>The manual's content will undergo a formal revie=
+w at least once per year to ensure continued accuracy and relevance.</span>=
+</p></li>
+   <li class=3D"m_abb6bec2 mantine-List-item">
+    <p><span class=3D"mantine-List-itemLabel"><strong>Triggered Updates:</s=
+trong><span>&nbsp;</span>Updates will be initiated in response to major app=
+lication architectural changes, significant modifications to deployment too=
+ls (Jenkins, Chef), or environmental shifts.</span></p></li>
+   <li class=3D"m_abb6bec2 mantine-List-item">
+    <p><span class=3D"mantine-List-itemLabel"><strong>Dedicated Owner for M=
+aintenance:</strong><span>&nbsp;</span>A specific individual or role will b=
+e assigned responsibility for the ongoing accuracy and updates of this manu=
+al.</span></p></li>
+  </ul>
+ </div>
+</div>
+<p><br></p>
+<hr>
+<h3 class=3D"m_8a5d1357 mantine-Title-root" id=3D"id-[BMaaS]StandardRelease=
+Procedure(BDD)-4.Procedure"><strong>4. Procedure</strong></h3>
+<p class=3D"mantine-focus-auto m_b6d8b162 mantine-Text-root">This is the co=
+re of the SOP. Provide clear, concise, and numbered steps. Please use "Code=
+ Block" macro for Linux commands and code snippet.</p>
+<div class=3D"table-wrap">
+ <table class=3D"relative-table wrapped confluenceTable" style=3D"width: 10=
+1.437%;">
+  <colgroup class=3D"">
+   <col class=3D"" style=3D"width: 4.86918%;">
+   <col class=3D"" style=3D"width: 18.7987%;">
+   <col class=3D"" style=3D"width: 37.5362%;">
+   <col class=3D"" style=3D"width: 38.7686%;">
+  </colgroup>
+  <tbody class=3D"">
+   <tr class=3D"">
+    <th style=3D"text-align: center;" class=3D"confluenceTh">#</th>
+    <th style=3D"text-align: center;" class=3D"confluenceTh">Step / Phase T=
+itle</th>
+    <th style=3D"text-align: center;" class=3D"confluenceTh">Instructions/C=
+ommands</th>
+    <th style=3D"text-align: center;" class=3D"confluenceTh">Expected Outpu=
+t</th>
+   </tr>
+   <tr>
+    <td class=3D"confluenceTd">0</td>
+    <td class=3D"confluenceTd">SOP input parameters</td>
+    <td class=3D"confluenceTd">
+     <p>&lt;&lt;CURRENT_TALARIA_VERSION&gt;&gt;</p>
+     <p>&lt;&lt;NEW_TALARIA_VERSION&gt;&gt;</p>
+     <p>&lt;&lt;CURRENT_KERAUNOS_VERSION&gt;&gt;</p>
+     <p>&lt;&lt;NEW_KERAUNOS_VERSION&gt;&gt;</p>
+     <p>&lt;&lt;CURRENT_TRIDENT_VERSION&gt;&gt;</p>
+     <p>&lt;&lt;NEW_TRIDENT_VERSION&gt;&gt;</p></td>
+    <td class=3D"confluenceTd"><br></td>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd">1</td>
+    <td class=3D"confluenceTd">sync chef orgs</td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p><strong>Pipeline</strong></p>
+      <p><a class=3D"external-link" href=3D"https://hnd1-genesis-jenkins01.=
+bmaas.jpe1a.dcnw.rakuten/job/sync_chef_orgs/build?delay=3D0sec" rel=3D"nofo=
+llow">https://hnd1-genesis-jenkins01.bmaas.jpe1a.dcnw.rakuten/job/sync_chef=
+_orgs/build?delay=3D0sec</a></p>
+      <p><strong>Parameters</strong></p>
+      <div class=3D"code panel pdl" style=3D"border-width: 1px;">
+       <div class=3D"codeContent panelContent pdl">
+        <pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=
+=3D"brush: java; gutter: false">Branch: master
+DcCode: HND1
+TARGET_GROUP: org
+TARGET: rakuten_jp_bdd_infra
+SOURCE_BRANCH: master
+SERVICE: bmaas
+SKIP_UPDATE_CHEF_ENVIRONMENT: &lt;UNCHECKED&gt;
+SLACK_CHANNEL: #iac-genesis-prod
+NOTIFY_SLACK: &lt;UNCHECKED&gt;</pre>
+       </div>
+      </div>
+     </div></td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p>Jenkins job completed successfully</p>
+     </div></td>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd">2</td>
+    <td class=3D"confluenceTd">switch trident version</td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p><strong>Pipeline</strong></p><a class=3D"external-link" href=3D"ht=
+tps://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcnw.rakuten/view/BMaaS_Release/job/c=
+ore%20resource%20group/job/bmaas/job/Switch_BMaaS_Application_Version/build=
+?delay=3D0sec" rel=3D"nofollow">https://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcn=
+w.rakuten/view/BMaaS_Release/job/core%20resource%20group/job/bmaas/job/Swit=
+ch_BMaaS_Application_Version/build?delay=3D0sec</a>
+      <br>
+      <p><strong>Parameters</strong></p>
+      <div class=3D"code panel pdl" style=3D"border-width: 1px;">
+       <div class=3D"codeContent panelContent pdl">
+        <pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=
+=3D"brush: java; gutter: false">COMPONENT: trident
+VERSION_TYPE: stable
+VERSION: &lt;&lt;NEW_TRIDENT_VERSION&gt;&gt;
+REVISION: &lt;EMPTY&gt;</pre>
+       </div>
+      </div>
+     </div></td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p>Jenkins job completed successfully</p>
+     </div></td>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd">3</td>
+    <td class=3D"confluenceTd">release trident</td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p><strong>Pipeline</strong></p><a class=3D"external-link" href=3D"ht=
+tps://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcnw.rakuten/view/BMaaS_Release/job/c=
+ore%20resource%20group/job/bmaas/job/Trident_Release/build?delay=3D0sec" re=
+l=3D"nofollow">https://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcnw.rakuten/view/BM=
+aaS_Release/job/core%20resource%20group/job/bmaas/job/Trident_Release/build=
+?delay=3D0sec</a>
+      <br>
+      <p><strong>Parameters</strong></p>
+      <div class=3D"code panel pdl" style=3D"border-width: 1px;">
+       <div class=3D"codeContent panelContent pdl">
+        <pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=
+=3D"brush: java; gutter: false">UPDATE_DATABASE: BDD
+GROUP: BDD
+TARGET_SERVERS: &lt;EMPTY&gt;
+DRY_RUN: &lt;UNCHECKED&gt;</pre>
+       </div>
+      </div>
+     </div></td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p>Jenkins job completed successfully</p>
+     </div></td>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd">4</td>
+    <td class=3D"confluenceTd">trident smoke test - HND1</td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p><strong>Test Endpoints</strong></p>
+      <div class=3D"code panel pdl" style=3D"border-width: 1px;">
+       <div class=3D"codeContent panelContent pdl">
+        <pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=
+=3D"brush: java; gutter: false">GET /api/v1/tenants/services/valid
+GET /api/v1/tenants?tenant_provider=3DROC&amp;exclude_other_tenant_provider=
+s=3Dtrue
+GET /api/v1/users
+GET /api/v1/admin/regiondc</pre>
+       </div>
+      </div>
+     </div></td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p>All endpoint requests return HTTP status code 200.</p>
+     </div></td>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd">5</td>
+    <td class=3D"confluenceTd">trident smoke test - HND2</td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p><strong>Test Endpoints</strong></p>
+      <div class=3D"code panel pdl" style=3D"border-width: 1px;">
+       <div class=3D"codeContent panelContent pdl">
+        <pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=
+=3D"brush: java; gutter: false">GET /api/v1/tenants/services/valid
+GET /api/v1/tenants?tenant_provider=3DROC&amp;exclude_other_tenant_provider=
+s=3Dtrue
+GET /api/v1/users
+GET /api/v1/admin/regiondc</pre>
+       </div>
+      </div>
+     </div></td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p>All endpoint requests return HTTP status code 200.</p>
+     </div></td>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd">6</td>
+    <td class=3D"confluenceTd">switch keraunos version</td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p><strong>Pipeline</strong></p><a class=3D"external-link" href=3D"ht=
+tps://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcnw.rakuten/view/BMaaS_Release/job/c=
+ore%20resource%20group/job/bmaas/job/Switch_BMaaS_Application_Version/build=
+?delay=3D0sec" rel=3D"nofollow">https://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcn=
+w.rakuten/view/BMaaS_Release/job/core%20resource%20group/job/bmaas/job/Swit=
+ch_BMaaS_Application_Version/build?delay=3D0sec</a>
+      <br>
+      <p><strong>Parameters</strong></p>
+      <div class=3D"code panel pdl" style=3D"border-width: 1px;">
+       <div class=3D"codeContent panelContent pdl">
+        <pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=
+=3D"brush: java; gutter: false">COMPONENT: keraunos
+VERSION_TYPE: stable
+VERSION: &lt;&lt;NEW_KERAUNOS_VERSION&gt;&gt;
+REVISION: &lt;EMPTY&gt;</pre>
+       </div>
+      </div>
+     </div></td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p>Jenkins job completed successfully</p>
+     </div></td>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd">7</td>
+    <td class=3D"confluenceTd">update keraunos database</td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p><strong>Pipeline</strong></p><a class=3D"external-link" href=3D"ht=
+tps://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcnw.rakuten/view/BMaaS_Release/job/c=
+ore%20resource%20group/job/bmaas/job/Keraunos_Database_Update/build?delay=
+=3D0sec" rel=3D"nofollow">https://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcnw.raku=
+ten/view/BMaaS_Release/job/core%20resource%20group/job/bmaas/job/Keraunos_D=
+atabase_Update/build?delay=3D0sec</a>
+      <br>
+      <p><strong>Parameters</strong></p>
+      <div class=3D"code panel pdl" style=3D"border-width: 1px;">
+       <div class=3D"codeContent panelContent pdl">
+        <pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=
+=3D"brush: java; gutter: false">UPDATE_DATABASE: JP1
+DRY_RUN: &lt;UNCHECKED&gt;</pre>
+       </div>
+      </div>
+     </div></td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p>Jenkins job completed successfully</p>
+     </div></td>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd">8</td>
+    <td class=3D"confluenceTd">release keraunos - HND1</td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p><strong>Pipeline</strong></p><a class=3D"external-link" href=3D"ht=
+tps://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcnw.rakuten/view/BMaaS_Release/job/c=
+ore%20resource%20group/job/bmaas/job/Keraunos_Release/build?delay=3D0sec" r=
+el=3D"nofollow">https://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcnw.rakuten/view/B=
+MaaS_Release/job/core%20resource%20group/job/bmaas/job/Keraunos_Release/bui=
+ld?delay=3D0sec</a>
+      <br>
+      <p><strong>Parameters</strong></p>
+      <div class=3D"code panel pdl" style=3D"border-width: 1px;">
+       <div class=3D"codeContent panelContent pdl">
+        <pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=
+=3D"brush: java; gutter: false">TARGET_SERVERS: HND1
+DRY_RUN: &lt;UNCHECKED&gt;</pre>
+       </div>
+      </div>
+     </div></td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p>Jenkins job completed successfully</p>
+     </div></td>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd">9</td>
+    <td class=3D"confluenceTd">release keraunos - HND2</td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p><strong>Pipeline</strong></p><a class=3D"external-link" href=3D"ht=
+tps://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcnw.rakuten/view/BMaaS_Release/job/c=
+ore%20resource%20group/job/bmaas/job/Keraunos_Release/build?delay=3D0sec" r=
+el=3D"nofollow">https://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcnw.rakuten/view/B=
+MaaS_Release/job/core%20resource%20group/job/bmaas/job/Keraunos_Release/bui=
+ld?delay=3D0sec</a>
+      <br>
+      <p><strong>Parameters</strong></p>
+      <div class=3D"code panel pdl" style=3D"border-width: 1px;">
+       <div class=3D"codeContent panelContent pdl">
+        <pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=
+=3D"brush: java; gutter: false">TARGET_SERVERS: HND2
+DRY_RUN: &lt;UNCHECKED&gt;</pre>
+       </div>
+      </div>
+     </div></td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p>Jenkins job completed successfully</p>
+     </div></td>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd">10</td>
+    <td class=3D"confluenceTd">keraunos smoke test - HND1</td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p><strong>Test Endpoints</strong></p>
+      <div class=3D"code panel pdl" style=3D"border-width: 1px;">
+       <div class=3D"codeContent panelContent pdl">
+        <pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=
+=3D"brush: java; gutter: false">GET&nbsp;/api/1.0/switches
+GET /api/1.0/switches/{id}
+POST /api/1.0/switches/tags
+DELETE /api/1.0/switches/tags
+GET /api/1.0/connections
+GET /api/1.0/networks
+GET /api/1.0/networks/config/{swName}</pre>
+       </div>
+      </div>
+     </div></td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p>All endpoint requests return HTTP status code 200.</p>
+     </div></td>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd">11</td>
+    <td class=3D"confluenceTd">keraunos smoke test - HND2</td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p><strong>Test Endpoints</strong></p>
+      <div class=3D"code panel pdl" style=3D"border-width: 1px;">
+       <div class=3D"codeContent panelContent pdl">
+        <pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=
+=3D"brush: java; gutter: false">GET&nbsp;/api/1.0/switches
+GET /api/1.0/switches/{id}
+POST /api/1.0/switches/tags
+DELETE /api/1.0/switches/tags
+GET /api/1.0/connections
+GET /api/1.0/networks
+GET /api/1.0/networks/config/{swName}</pre>
+       </div>
+      </div>
+     </div></td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p>All endpoint requests return HTTP status code 200.</p>
+     </div></td>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd">12</td>
+    <td class=3D"confluenceTd">switch talaria version</td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p><strong>Pipeline</strong></p><a class=3D"external-link" href=3D"ht=
+tps://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcnw.rakuten/view/BMaaS_Release/job/c=
+ore%20resource%20group/job/bmaas/job/Switch_BMaaS_Application_Version/build=
+?delay=3D0sec" rel=3D"nofollow">https://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcn=
+w.rakuten/view/BMaaS_Release/job/core%20resource%20group/job/bmaas/job/Swit=
+ch_BMaaS_Application_Version/build?delay=3D0sec</a>
+      <br>
+      <p><strong>Parameters</strong></p>
+      <div class=3D"code panel pdl" style=3D"border-width: 1px;">
+       <div class=3D"codeContent panelContent pdl">
+        <pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=
+=3D"brush: java; gutter: false">COMPONENT: talaria
+VERSION_TYPE: stable
+VERSION: &lt;&lt;NEW_TALARIA_VERSION&gt;&gt;
+REVISION: &lt;EMPTY&gt;</pre>
+       </div>
+      </div>
+     </div></td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p>Jenkins job completed successfully</p>
+     </div></td>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd">13</td>
+    <td class=3D"confluenceTd">update talaria database</td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p><strong>Pipeline</strong></p><a class=3D"external-link" href=3D"ht=
+tps://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcnw.rakuten/view/BMaaS_Release/job/c=
+ore%20resource%20group/job/bmaas/job/Talaria_Database_Update/build?delay=3D=
+0sec" rel=3D"nofollow">https://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcnw.rakuten=
+/view/BMaaS_Release/job/core%20resource%20group/job/bmaas/job/Talaria_Datab=
+ase_Update/build?delay=3D0sec</a>
+      <br>
+      <p><strong>Parameters</strong></p>
+      <div class=3D"code panel pdl" style=3D"border-width: 1px;">
+       <div class=3D"codeContent panelContent pdl">
+        <pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=
+=3D"brush: java; gutter: false">UPDATE_DATABASE: JP1
+DRY_RUN: &lt;UNCHECKED&gt;</pre>
+       </div>
+      </div>
+     </div></td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p>Jenkins job completed successfully</p>
+     </div></td>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd">14</td>
+    <td class=3D"confluenceTd">release talaria - HND1</td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p><strong>Pipeline</strong></p><a class=3D"external-link" href=3D"ht=
+tps://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcnw.rakuten/view/BMaaS_Release/job/c=
+ore%20resource%20group/job/bmaas/job/Talaria_Release/build?delay=3D0sec" re=
+l=3D"nofollow">https://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcnw.rakuten/view/BM=
+aaS_Release/job/core%20resource%20group/job/bmaas/job/Talaria_Release/build=
+?delay=3D0sec</a>
+      <br>
+      <p><strong>Parameters</strong></p>
+      <div class=3D"code panel pdl" style=3D"border-width: 1px;">
+       <div class=3D"codeContent panelContent pdl">
+        <pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=
+=3D"brush: java; gutter: false">TARGET_SERVERS: HND1
+DRY_RUN: &lt;UNCHECKED&gt;</pre>
+       </div>
+      </div>
+     </div></td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p>Jenkins job completed successfully</p>
+     </div></td>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd">15</td>
+    <td class=3D"confluenceTd">release talaria - HND2</td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p><strong>Pipeline</strong></p><a class=3D"external-link" href=3D"ht=
+tps://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcnw.rakuten/view/BMaaS_Release/job/c=
+ore%20resource%20group/job/bmaas/job/Talaria_Release/build?delay=3D0sec" re=
+l=3D"nofollow">https://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcnw.rakuten/view/BM=
+aaS_Release/job/core%20resource%20group/job/bmaas/job/Talaria_Release/build=
+?delay=3D0sec</a>
+      <br>
+      <p><strong>Parameters</strong></p>
+      <div class=3D"code panel pdl" style=3D"border-width: 1px;">
+       <div class=3D"codeContent panelContent pdl">
+        <pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=
+=3D"brush: java; gutter: false">TARGET_SERVERS: HND2
+DRY_RUN: &lt;UNCHECKED&gt;</pre>
+       </div>
+      </div>
+     </div></td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p>Jenkins job completed successfully</p>
+     </div></td>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd">16</td>
+    <td class=3D"confluenceTd">talaria smoke test - HND1</td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p><strong>Test Endpoints</strong></p>
+      <div class=3D"code panel pdl" style=3D"border-width: 1px;">
+       <div class=3D"codeContent panelContent pdl">
+        <pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=
+=3D"brush: java; gutter: false">GET /api/1.0/servers
+GET /api/1.0/servers/{id}
+GET /api/1.0/servers/{id}/event
+POST /api/1.0/servers/tags
+DELETE /api/1.0/servers/tags
+POST /api/1.0/servers/install&nbsp;
+POST /api/1.0/servers/destroy
+POST&nbsp;/api/1.0/servers/health-check</pre>
+       </div>
+      </div>
+     </div></td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p>All endpoint requests return HTTP status code 200.</p>
+     </div></td>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd">17</td>
+    <td class=3D"confluenceTd">talaria smoke test - HND2</td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p><strong>Test Endpoints</strong></p>
+      <div class=3D"code panel pdl" style=3D"border-width: 1px;">
+       <div class=3D"codeContent panelContent pdl">
+        <pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=
+=3D"brush: java; gutter: false">GET /api/1.0/servers
+GET /api/1.0/servers/{id}
+GET /api/1.0/servers/{id}/event
+POST /api/1.0/servers/tags
+DELETE /api/1.0/servers/tags
+POST /api/1.0/servers/install&nbsp;
+POST /api/1.0/servers/destroy
+POST&nbsp;/api/1.0/servers/health-check</pre>
+       </div>
+      </div>
+     </div></td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p>All endpoint requests return HTTP status code 200.</p>
+     </div></td>
+   </tr>
+  </tbody>
+ </table>
+</div>
+<p><br></p>
+<hr>
+<h3 class=3D"m_8a5d1357 mantine-Title-root" id=3D"id-[BMaaS]StandardRelease=
+Procedure(BDD)-5.Post-ProcedureChecks"><strong>5. Post-Procedure Checks</st=
+rong></h3>
+<p class=3D"mantine-focus-auto m_b6d8b162 mantine-Text-root">How do you con=
+firm that the procedure was completed successfully and the system is in the=
+ expected state?</p>
+<h4 id=3D"id-[BMaaS]StandardReleaseProcedure(BDD)-5.1Monitoring">5.1 Monito=
+ring</h4>
+<div class=3D"panel" style=3D"border-width: 1px;">
+ <div class=3D"panelContent">
+  <p>Log monitoring for Talaria, Keraunos, and Trident</p>
+ </div>
+</div>
+<h4 id=3D"id-[BMaaS]StandardReleaseProcedure(BDD)-5.2Testing">5.2 Testing</=
+h4>
+<div class=3D"panel" style=3D"border-width: 1px;">
+ <div class=3D"panelContent">
+  <p>The smoke testing will be conducted during the release operation.</p>
+  <p>The regression testing will be conducted after the release operation.<=
+/p>
+ </div>
+</div>
+<h4 id=3D"id-[BMaaS]StandardReleaseProcedure(BDD)-5.3Finalacceptancetesting=
+byPICofdependedservice">5.3 Final acceptance testing by PIC of depended ser=
+vice</h4>
+<div class=3D"panel" style=3D"border-width: 1px;">
+ <div class=3D"panelContent">
+  <p>N/A</p>
+ </div>
+</div>
+<p><br></p>
+<hr>
+<h3 class=3D"m_8a5d1357 mantine-Title-root" id=3D"id-[BMaaS]StandardRelease=
+Procedure(BDD)-6.TroubleshootingCommonIssues"><strong>6. Troubleshooting Co=
+mmon Issues</strong></h3>
+<p class=3D"mantine-focus-auto m_b6d8b162 mantine-Text-root">List potential=
+ problems that might arise during or after this procedure and their solutio=
+ns.</p>
+<div class=3D"panel" style=3D"border-width: 1px;">
+ <div class=3D"panelContent">
+  <p>N/A</p>
+ </div>
+</div>
+<p><br></p>
+<hr>
+<h3 class=3D"m_8a5d1357 mantine-Title-root" id=3D"id-[BMaaS]StandardRelease=
+Procedure(BDD)-7.Reporting&amp;EscalationFlow"><strong>7. Reporting &amp; E=
+scalation Flow</strong></h3>
+<p class=3D"mantine-focus-auto m_b6d8b162 mantine-Text-root">Outline the co=
+mmunication and escalation paths if issues are encountered during this proc=
+edure, or if the procedure cannot be completed successfully.</p>
+<h4 class=3D"mantine-focus-auto m_b6d8b162 mantine-Text-root" id=3D"id-[BMa=
+aS]StandardReleaseProcedure(BDD)-7.1InternalReporting">7.1 Internal Reporti=
+ng</h4>
+<div class=3D"table-wrap">
+ <table class=3D"relative-table wrapped confluenceTable" style=3D"width: 40=
+.375%;">
+  <colgroup class=3D"">
+   <col class=3D"" style=3D"width: 39.9813%;">
+   <col class=3D"" style=3D"width: 59.9501%;">
+  </colgroup>
+  <tbody class=3D"">
+   <tr class=3D"">
+    <th style=3D"text-align: center;" class=3D"confluenceTh">Tiers</th>
+    <th style=3D"text-align: center;" class=3D"confluenceTh">Person In Char=
+ge</th>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd">Director (L1.5)</td>
+    <td class=3D"confluenceTd"><span style=3D"color:#172b4d;">Yoshida, Hiro=
+nori | Yossy | TPD</span></td>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd">General Manager (L2)</td>
+    <td class=3D"confluenceTd"><span style=3D"color:#172b4d;">Yamasaki, Tos=
+hiyuki | Toshi | CPSD</span></td>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd">Senior Manager (L3)</td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p><a class=3D"confluence-userlink user-mention" data-username=3D"ryo=
+.kimura" href=3D"/confluence/display/~ryo.kimura" data-linked-resource-id=
+=3D"1966231" data-linked-resource-version=3D"2" data-linked-resource-type=
+=3D"userinfo" data-base-url=3D"https://confluence.rakuten-it.com/confluence=
+">Kimura, Ryo | Ryo | CLSD</a>&nbsp;</p>
+     </div></td>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd">Manager (L4)</td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p><a class=3D"confluence-userlink user-mention" data-username=3D"lun=
+.xu" href=3D"/confluence/display/~lun.xu" data-linked-resource-id=3D"620625=
+940" data-linked-resource-version=3D"2" data-linked-resource-type=3D"userin=
+fo" data-base-url=3D"https://confluence.rakuten-it.com/confluence">Xu, Lun =
+| Leon | CLSD</a>&nbsp;</p>
+     </div></td>
+   </tr>
+  </tbody>
+ </table>
+</div>
+<h4 id=3D"id-[BMaaS]StandardReleaseProcedure(BDD)-7.2External/StakeholderRe=
+porting">7.2 External/Stakeholder Reporting</h4>
+<div class=3D"table-wrap">
+ <table class=3D"relative-table wrapped confluenceTable" style=3D"width: 40=
+.625%;">
+  <colgroup class=3D"">
+   <col class=3D"" style=3D"width: 40.1974%;">
+   <col class=3D"" style=3D"width: 59.735%;">
+  </colgroup>
+  <tbody class=3D"">
+   <tr class=3D"">
+    <th style=3D"text-align: center;" class=3D"confluenceTh">Impacted Servi=
+ces</th>
+    <th style=3D"text-align: center;" class=3D"confluenceTh">Person In Char=
+ge</th>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd">BMaaS</td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p><a class=3D"confluence-userlink user-mention" data-username=3D"sas=
+cha.duschen" href=3D"/confluence/display/~sascha.duschen" data-linked-resou=
+rce-id=3D"1005452743" data-linked-resource-version=3D"3" data-linked-resour=
+ce-type=3D"userinfo" data-base-url=3D"https://confluence.rakuten-it.com/con=
+fluence">Duschen, Sascha | Sascha | CLSD</a>&nbsp;</p>
+     </div></td>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd"><br></td>
+    <td class=3D"confluenceTd"><br></td>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd"><br></td>
+    <td class=3D"confluenceTd"><br></td>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd"><br></td>
+    <td class=3D"confluenceTd"><br></td>
+   </tr>
+  </tbody>
+ </table>
+</div>
+<p><br></p>
+<hr>
+<h3 class=3D"m_8a5d1357 mantine-Title-root" id=3D"id-[BMaaS]StandardRelease=
+Procedure(BDD)-8.Rollback/Remediation"><strong>8. Rollback / Remediation</s=
+trong></h3>
+<p class=3D"mantine-focus-auto m_b6d8b162 mantine-Text-root">What steps sho=
+uld be taken if the procedure fails or needs to be undone? Please use "Code=
+ Block" macro for Linux commands and code snippet.</p>
+<div class=3D"table-wrap">
+ <table class=3D"relative-table wrapped confluenceTable" style=3D"width: 10=
+1.437%;">
+  <colgroup class=3D"">
+   <col class=3D"" style=3D"width: 4.86918%;">
+   <col class=3D"" style=3D"width: 18.7987%;">
+   <col class=3D"" style=3D"width: 37.5362%;">
+   <col class=3D"" style=3D"width: 38.7686%;">
+  </colgroup>
+  <tbody class=3D"">
+   <tr class=3D"">
+    <th style=3D"text-align: center;" class=3D"confluenceTh">#</th>
+    <th style=3D"text-align: center;" class=3D"confluenceTh">Step / Phase T=
+itle</th>
+    <th style=3D"text-align: center;" class=3D"confluenceTh">Instructions/C=
+ommands</th>
+    <th style=3D"text-align: center;" class=3D"confluenceTh">Expected Outpu=
+t</th>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd">1</td>
+    <td class=3D"confluenceTd">switch talaria version</td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p><strong>Pipeline</strong></p><a class=3D"external-link" href=3D"ht=
+tps://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcnw.rakuten/view/BMaaS_Release/job/c=
+ore%20resource%20group/job/bmaas/job/Switch_BMaaS_Application_Version/build=
+?delay=3D0sec" rel=3D"nofollow">https://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcn=
+w.rakuten/view/BMaaS_Release/job/core%20resource%20group/job/bmaas/job/Swit=
+ch_BMaaS_Application_Version/build?delay=3D0sec</a>
+      <br>
+      <p><strong>Parameters</strong></p>
+      <div class=3D"code panel pdl" style=3D"border-width: 1px;">
+       <div class=3D"codeContent panelContent pdl">
+        <pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=
+=3D"brush: java; gutter: false">COMPONENT: talaria
+VERSION_TYPE: stable
+VERSION: &lt;&lt;CURRENT_TALARIA_VERSION&gt;&gt;
+REVISION: &lt;EMPTY&gt;</pre>
+       </div>
+      </div>
+     </div></td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p>Jenkins job completed successfully</p>
+     </div></td>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd">2</td>
+    <td class=3D"confluenceTd">update talaria database</td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p><strong>Pipeline</strong></p><a class=3D"external-link" href=3D"ht=
+tps://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcnw.rakuten/view/BMaaS_Release/job/c=
+ore%20resource%20group/job/bmaas/job/Talaria_Database_Update/build?delay=3D=
+0sec" rel=3D"nofollow">https://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcnw.rakuten=
+/view/BMaaS_Release/job/core%20resource%20group/job/bmaas/job/Talaria_Datab=
+ase_Update/build?delay=3D0sec</a>
+      <br>
+      <p><strong>Parameters</strong></p>
+      <div class=3D"code panel pdl" style=3D"border-width: 1px;">
+       <div class=3D"codeContent panelContent pdl">
+        <pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=
+=3D"brush: java; gutter: false">UPDATE_DATABASE: JP1
+DRY_RUN: &lt;UNCHECKED&gt;</pre>
+       </div>
+      </div>
+     </div></td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p>Jenkins job completed successfully</p>
+     </div></td>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd">3</td>
+    <td class=3D"confluenceTd">release talaria - HND1</td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p><strong>Pipeline</strong></p><a class=3D"external-link" href=3D"ht=
+tps://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcnw.rakuten/view/BMaaS_Release/job/c=
+ore%20resource%20group/job/bmaas/job/Talaria_Release/build?delay=3D0sec" re=
+l=3D"nofollow">https://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcnw.rakuten/view/BM=
+aaS_Release/job/core%20resource%20group/job/bmaas/job/Talaria_Release/build=
+?delay=3D0sec</a>
+      <br>
+      <p><strong>Parameters</strong></p>
+      <div class=3D"code panel pdl" style=3D"border-width: 1px;">
+       <div class=3D"codeContent panelContent pdl">
+        <pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=
+=3D"brush: java; gutter: false">TARGET_SERVERS: HND1
+DRY_RUN: &lt;UNCHECKED&gt;</pre>
+       </div>
+      </div>
+     </div></td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p>Jenkins job completed successfully</p>
+     </div></td>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd">4</td>
+    <td class=3D"confluenceTd">release talaria - HND2</td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p><strong>Pipeline</strong></p><a class=3D"external-link" href=3D"ht=
+tps://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcnw.rakuten/view/BMaaS_Release/job/c=
+ore%20resource%20group/job/bmaas/job/Talaria_Release/build?delay=3D0sec" re=
+l=3D"nofollow">https://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcnw.rakuten/view/BM=
+aaS_Release/job/core%20resource%20group/job/bmaas/job/Talaria_Release/build=
+?delay=3D0sec</a>
+      <br>
+      <p><strong>Parameters</strong></p>
+      <div class=3D"code panel pdl" style=3D"border-width: 1px;">
+       <div class=3D"codeContent panelContent pdl">
+        <pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=
+=3D"brush: java; gutter: false">TARGET_SERVERS: HND2
+DRY_RUN: &lt;UNCHECKED&gt;</pre>
+       </div>
+      </div>
+     </div></td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p>Jenkins job completed successfully</p>
+     </div></td>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd">5</td>
+    <td class=3D"confluenceTd">switch keraunos version</td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p><strong>Pipeline</strong></p><a class=3D"external-link" href=3D"ht=
+tps://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcnw.rakuten/view/BMaaS_Release/job/c=
+ore%20resource%20group/job/bmaas/job/Switch_BMaaS_Application_Version/build=
+?delay=3D0sec" rel=3D"nofollow">https://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcn=
+w.rakuten/view/BMaaS_Release/job/core%20resource%20group/job/bmaas/job/Swit=
+ch_BMaaS_Application_Version/build?delay=3D0sec</a>
+      <br>
+      <p><strong>Parameters</strong></p>
+      <div class=3D"code panel pdl" style=3D"border-width: 1px;">
+       <div class=3D"codeContent panelContent pdl">
+        <pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=
+=3D"brush: java; gutter: false">COMPONENT: keraunos
+VERSION_TYPE: stable
+VERSION: &lt;&lt;CURRENT_KERAUNOS_VERSION&gt;&gt;
+REVISION: &lt;EMPTY&gt;</pre>
+       </div>
+      </div>
+     </div></td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p>Jenkins job completed successfully</p>
+     </div></td>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd">6</td>
+    <td class=3D"confluenceTd">update keraunos database</td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p><strong>Pipeline</strong></p><a class=3D"external-link" href=3D"ht=
+tps://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcnw.rakuten/view/BMaaS_Release/job/c=
+ore%20resource%20group/job/bmaas/job/Keraunos_Database_Update/build?delay=
+=3D0sec" rel=3D"nofollow">https://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcnw.raku=
+ten/view/BMaaS_Release/job/core%20resource%20group/job/bmaas/job/Keraunos_D=
+atabase_Update/build?delay=3D0sec</a>
+      <br>
+      <p><strong>Parameters</strong></p>
+      <div class=3D"code panel pdl" style=3D"border-width: 1px;">
+       <div class=3D"codeContent panelContent pdl">
+        <pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=
+=3D"brush: java; gutter: false">UPDATE_DATABASE: JP1
+DRY_RUN: &lt;UNCHECKED&gt;</pre>
+       </div>
+      </div>
+     </div></td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p>Jenkins job completed successfully</p>
+     </div></td>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd">7</td>
+    <td class=3D"confluenceTd">release keraunos - HND1</td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p><strong>Pipeline</strong></p><a class=3D"external-link" href=3D"ht=
+tps://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcnw.rakuten/view/BMaaS_Release/job/c=
+ore%20resource%20group/job/bmaas/job/Keraunos_Release/build?delay=3D0sec" r=
+el=3D"nofollow">https://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcnw.rakuten/view/B=
+MaaS_Release/job/core%20resource%20group/job/bmaas/job/Keraunos_Release/bui=
+ld?delay=3D0sec</a>
+      <br>
+      <p><strong>Parameters</strong></p>
+      <div class=3D"code panel pdl" style=3D"border-width: 1px;">
+       <div class=3D"codeContent panelContent pdl">
+        <pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=
+=3D"brush: java; gutter: false">TARGET_SERVERS: HND1
+DRY_RUN: &lt;UNCHECKED&gt;</pre>
+       </div>
+      </div>
+     </div></td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p>Jenkins job completed successfully</p>
+     </div></td>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd">8</td>
+    <td class=3D"confluenceTd">release keraunos - HND2</td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p><strong>Pipeline</strong></p><a class=3D"external-link" href=3D"ht=
+tps://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcnw.rakuten/view/BMaaS_Release/job/c=
+ore%20resource%20group/job/bmaas/job/Keraunos_Release/build?delay=3D0sec" r=
+el=3D"nofollow">https://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcnw.rakuten/view/B=
+MaaS_Release/job/core%20resource%20group/job/bmaas/job/Keraunos_Release/bui=
+ld?delay=3D0sec</a>
+      <br>
+      <p><strong>Parameters</strong></p>
+      <div class=3D"code panel pdl" style=3D"border-width: 1px;">
+       <div class=3D"codeContent panelContent pdl">
+        <pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=
+=3D"brush: java; gutter: false">TARGET_SERVERS: HND2
+DRY_RUN: &lt;UNCHECKED&gt;</pre>
+       </div>
+      </div>
+     </div></td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p>Jenkins job completed successfully</p>
+     </div></td>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd">9</td>
+    <td class=3D"confluenceTd">switch trident version</td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p><strong>Pipeline</strong></p><a class=3D"external-link" href=3D"ht=
+tps://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcnw.rakuten/view/BMaaS_Release/job/c=
+ore%20resource%20group/job/bmaas/job/Switch_BMaaS_Application_Version/build=
+?delay=3D0sec" rel=3D"nofollow">https://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcn=
+w.rakuten/view/BMaaS_Release/job/core%20resource%20group/job/bmaas/job/Swit=
+ch_BMaaS_Application_Version/build?delay=3D0sec</a>
+      <br>
+      <p><strong>Parameters</strong></p>
+      <div class=3D"code panel pdl" style=3D"border-width: 1px;">
+       <div class=3D"codeContent panelContent pdl">
+        <pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=
+=3D"brush: java; gutter: false">COMPONENT: trident
+VERSION_TYPE: stable
+VERSION: &lt;&lt;CURRENT_TRIDENT_VERSION&gt;&gt;
+REVISION: &lt;EMPTY&gt;</pre>
+       </div>
+      </div>
+     </div></td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p>Jenkins job completed successfully</p>
+     </div></td>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd">10</td>
+    <td class=3D"confluenceTd">release trident - HND1</td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p><strong>Pipeline</strong></p><a class=3D"external-link" href=3D"ht=
+tps://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcnw.rakuten/view/BMaaS_Release/job/c=
+ore%20resource%20group/job/bmaas/job/Trident_Release/build?delay=3D0sec" re=
+l=3D"nofollow">https://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcnw.rakuten/view/BM=
+aaS_Release/job/core%20resource%20group/job/bmaas/job/Trident_Release/build=
+?delay=3D0sec</a>
+      <br>
+      <p><strong>Parameters</strong></p>
+      <div class=3D"code panel pdl" style=3D"border-width: 1px;">
+       <div class=3D"codeContent panelContent pdl">
+        <pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=
+=3D"brush: java; gutter: false">UPDATE_DATABASE: BDD
+GROUP: BDD
+TARGET_SERVERS: &lt;EMPTY&gt;
+DRY_RUN: &lt;UNCHECKED&gt;</pre>
+       </div>
+      </div>
+     </div></td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p>Jenkins job completed successfully</p>
+     </div></td>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd">11</td>
+    <td class=3D"confluenceTd">release trident - HND2</td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p><strong>Pipeline</strong></p><a class=3D"external-link" href=3D"ht=
+tps://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcnw.rakuten/view/BMaaS_Release/job/c=
+ore%20resource%20group/job/bmaas/job/Trident_Release/build?delay=3D0sec" re=
+l=3D"nofollow">https://jpe2z-bdg-jenkins01.bmaas.jpe2z.dcnw.rakuten/view/BM=
+aaS_Release/job/core%20resource%20group/job/bmaas/job/Trident_Release/build=
+?delay=3D0sec</a>
+      <br>
+      <p><strong>Parameters</strong></p>
+      <div class=3D"code panel pdl" style=3D"border-width: 1px;">
+       <div class=3D"codeContent panelContent pdl">
+        <pre class=3D"syntaxhighlighter-pre" data-syntaxhighlighter-params=
+=3D"brush: java; gutter: false">UPDATE_DATABASE: BDD
+GROUP: BDD
+TARGET_SERVERS: &lt;EMPTY&gt;
+DRY_RUN: &lt;UNCHECKED&gt;</pre>
+       </div>
+      </div>
+     </div></td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p>Jenkins job completed successfully</p>
+     </div></td>
+   </tr>
+  </tbody>
+ </table>
+</div>
+<p><br></p>
+<hr>
+<h3 class=3D"m_8a5d1357 mantine-Title-root" id=3D"id-[BMaaS]StandardRelease=
+Procedure(BDD)-9.RelatedDocuments&amp;Links"><strong>9. Related Documents &=
+amp; Links</strong></h3>
+<p class=3D"mantine-focus-auto m_b6d8b162 mantine-Text-root">Link to other =
+relevant Confluence pages, external documentation, or forms.</p>
+<p><br></p>
+<hr>
+<h3 class=3D"m_8a5d1357 mantine-Title-root" id=3D"id-[BMaaS]StandardRelease=
+Procedure(BDD)-10.RevisionHistory"><strong>10. Revision History</strong></h=
+3>
+<p class=3D"mantine-focus-auto m_b6d8b162 mantine-Text-root">A detailed log=
+ of changes made to this specific SOP.</p>
+<div class=3D"table-wrap">
+ <table class=3D"relative-table wrapped confluenceTable" style=3D"width: 63=
+.9375%;">
+  <colgroup class=3D"">
+   <col class=3D"" style=3D"width: 13.2039%;">
+   <col class=3D"" style=3D"width: 16.1367%;">
+   <col class=3D"" style=3D"width: 19.3657%;">
+   <col class=3D"" style=3D"width: 51.2507%;">
+  </colgroup>
+  <thead class=3D"">
+   <tr class=3D"">
+    <th style=3D"text-align: center;" class=3D"confluenceTh"><span>Date</sp=
+an></th>
+    <th style=3D"text-align: center;" class=3D"confluenceTh"><span>Version<=
+/span></th>
+    <th style=3D"text-align: center;" class=3D"confluenceTh"><span>Author(s=
+)</span></th>
+    <th style=3D"text-align: center;" class=3D"confluenceTh"><span>Changes =
+Made</span></th>
+   </tr>
+  </thead>
+  <tbody class=3D"">
+   <tr class=3D"">
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p><time datetime=3D"2026-02-10" class=3D"date-past">10 Feb 2026</tim=
+e>&nbsp;</p>
+     </div></td>
+    <td class=3D"confluenceTd">1.0</td>
+    <td class=3D"confluenceTd">
+     <div class=3D"content-wrapper">
+      <p><a class=3D"confluence-userlink user-mention" data-username=3D"lun=
+.xu" href=3D"/confluence/display/~lun.xu" data-linked-resource-id=3D"620625=
+940" data-linked-resource-version=3D"2" data-linked-resource-type=3D"userin=
+fo" data-base-url=3D"https://confluence.rakuten-it.com/confluence">Xu, Lun =
+| Leon | CLSD</a>&nbsp;</p>
+     </div></td>
+    <td class=3D"confluenceTd">First draft</td>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd"><br></td>
+    <td class=3D"confluenceTd"><br></td>
+    <td class=3D"confluenceTd"><br></td>
+    <td class=3D"confluenceTd"><br></td>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd"><br></td>
+    <td class=3D"confluenceTd"><br></td>
+    <td class=3D"confluenceTd"><br></td>
+    <td class=3D"confluenceTd"><br></td>
+   </tr>
+   <tr class=3D"">
+    <td class=3D"confluenceTd"><br></td>
+    <td class=3D"confluenceTd"><br></td>
+    <td class=3D"confluenceTd"><br></td>
+    <td class=3D"confluenceTd"><br></td>
+   </tr>
+  </tbody>
+ </table>
+</div>
+    </div>
+</body>
+</html>
+------=_Part_78301_357422063.1790825693516--

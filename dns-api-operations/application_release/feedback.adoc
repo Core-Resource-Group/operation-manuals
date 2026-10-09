@@ -1,0 +1,186 @@
+= Template Review, DNS API, Application Release
+
+.Key Notes:
+* TASC Reviewers *MUST* be granted access to the operational codebases for review. Operational code is expected to live on-premise, generally on the company's standard BitBucket service. Not all Reviewers have GHC or even GHE access.
+* Anywhere commands are being run and checks are recording correct behaviour of the system (e.g. Step 7), evidence *MUST* be captured, which MUST be recorded on the CM ticket for the Operation (redacted if required for confidentiality). Details of what evidence to capture needs to be provided in the relevant steps, along with clear examples. For text-commands, copy/paste of text output is acceptable. For UI usage, screenshosts are acceptable.
+* There is no clear distinction of "Service" versus "Procedure" Risk levels. Due to the significant number of manually run (copy/paste) type commands, and assessment as AL0, the Procedure Risk Level must automatically be set to "High".
+
+.Additional Feedback Notes
+* Strong possibility team is pushed to do initial deploy and pre-switch smoke-tests in Standby cluster first (also my recommendation).
+* Given the repeated nature of multiple steps, general recommendation would be each common step to be captured in a script, with appropriate inputs (and validation thereof): e.g. `./script.sh {cluster} {side}`, reducing the amount of copy/paste related risk to absolute minimum.
+
+.To-Fix (Specific)
+|===
+| Section | Item | Notes
+
+| 1. Summary
+| Links to operation code repository/repositories.
+| These MUST be linked by commit-hash, to the specific commit that will be used with this template. In case script updates are required as part of the TASC Review stage, the relevant commit can of course be updated to the fix-version at that time.
+
+| -
+| Links to application code repositories.
+| If the actual repository does not change, link here.
+
+| 2. Classification & Risk
+| Missing Mandatory details: +
+* Risk Level
+* GMS Impct Possible
+* Data Loss Possible
+| These may not be variable. If this is variable by environment, create 1 template per environment. "Risk Level" MUST be static, clearly defined via both the Procedure Risk Level and the Service Risk Level (see Key Notes).
+
+| 4. Variable Parameters
+| Missing example values
+| Replace all `N/A` entries with actual examples
+
+| -
+| Missing variables
+| `COLOUR_*` variables missing. Need renaming to not use `_1`/`_2` suffix. Should use accurately descriptive naming such as `COLOUR_ACTIVE`/`COLOUR_STANDBY` to remove any ambiguity about which colour is to be used.
+
+| -
+| Move repo links to Summary.
+| Links to specific commit(s) for release should remain variables.
+
+| -
+| `ACTIVE_CLUSTER`, `STANDBY_CLUSTER`
+| either split to 2 table entries or split to 2 lines
+
+| -
+| `CASSANDRA_AZ_*`
+| Input entry per line, e.g.
+```
+{{CASSANDRA_AZ_N}}
+{{CASSANDRA_AZ_N_FQDN_1}}
+{{CASSANDRA_AZ_N_FQDN_2}}
+```
+
+| -
+| `KIBANA_*` and `GRAFANA_*`, remove.
+| Along with Template-environment split, if these are specific per-environment they should be hard-coded.
+
+| 5. Communication & Announcements
+| Escalation details
+| No details for escalation process in case of Procedure failure and/or Service impact.
+
+| -
+| Standard communication notes for CPSD Operations missing
+| Communication on the relevant Viber channel(s) by Operator + Buddy. If uncertain about details, please review the latest Change Management v3.0 training material on GROW (details are conveniently covered there).
+
+| 6. Preqequisite Checks
+| Missing detail: Commands and/or UIs to check.
+| Exact commands to run needed, with example expected output. Screenshots for UIs. Detail needs to be clear for how to decide if step is "success" or "failure", and whether to Go/No-Go with operation. e.g. `docker image list \| grep "required-imaged-name"`
+
+| -
+| Tool Checks
+| All required tools need to be listed and checked installed
+
+| - 
+| Input checks
+| Missing verification of input files (schema migration, data patch; file available, correctly formatted)
+
+| 10. Abort Criteria
+| "On abort"
+| All required criteria for Abort/Rollback judgement are required as part of the template. Communication requirement to L4/L3 not acceptable.
+
+| 11. Operations Procedure
+| Step 1
+| Missing expected/example command output for migration. Output must be captured as operation evidence.
+
+| -
+| Step 1
+| Missing criteria for how to judge success-after-retry case and how to judge failure.
+
+| -
+| Step 2
+| Exact instructions for steps required for "investigation" needed.
+
+| -
+| Step 3 (and later references)
+| Rename `COLOUR_*` variables in-line with above feedback on section 4.
+
+| -
+| Step 3
+| Active vs Standby side should be pre-checked and recorded in Operation Ticket, and validated at start of Operation. In case a recent emergency operation triggered a desync versus expected (expected: the value on the CM ticket), this should be identified prior to the start of the operation and the correct-exected value noted on the CM-operation ticket, for the Operator to check as part of Pre-Exec Checklist.
+
+| -
+| Step 3
+| Missing screenshots of workflow trigger menu / input screen, identifying exactly how to run a workflow.
+
+| -
+| Step 3 (3b?)
+| Describe behaviour/steps/commands of linked script
+
+| -
+| Step 4 (Title)
+| Remove `.toUpperCase()`
+
+| -
+| Steps 4/9/14/17 + 8/16
+| The script (GH Action) responsible for the deploy + traffic cutover appear to be combined. These should be separated into 2 workflows, removing risk of running both steps at once. The 2 steps can be recombined if/when the intermediate checks are rolled into the script for automated checking.
+
+| -
+| Step 4/9/14/17 (Abort criteria)
+| Strict criteria for when to retry vs abort not provided
+
+| -
+| Step 6+11
+| Call only `/health` endpoint if requesting health status (drop reference to `/metrics`). Instruction should be fixed and unambiguous.
+
+| -
+| Step 7+12
+| `CHECK` -> `CHANGE`. Only "purely" read-only steps may be marked `CHECK`. Any operational step that modifies some part of system state (including "smoke-tests") must be marked as `CHANGE`. Purpose can be clarified in the Why/Scope statements.
+
+| -
+| Step 7+12
+| "Safe to abort": no clarification about rollback/clean-up in case of mid-step abort.
+
+| -
+| Step 7+12
+| Due to the general complexity of this Step and risk of mis-operation with Copy/Paste, I expect this whole step to be rejected and pushed for replacement with a fixed script (bash minimum, Python or otherwise also acceptable). Each sub-step should have validation of changes built into the script.
+
+If run-by-operator, the script should prompt for user credentials. These should not be embedded in the script or passed via plain-text flags on the command-line because they will be recorded in audit logs.
+
+If run-by-automation, the script should use Service Account credentials provided to the pipeline script by the orchestration tool (e.g. via Jenkins Credentials Plugin and environment variables).
+
+| -
+| Step 7+12 (Monitoring & Evidence)
+| Expected/example outputs need to be captured for the commands run during this step. As-is this will not be accepted. The Operator should also record captured evidence at time of the operation (copy/paste of text if command output, screenshot if UI; evidence to be recorded on).
+
+| -
+| (Missing Steps)
+| No health-checks or smoke-tests for Standby Cluster, equivalent to 6/11 and 7/12.
+
+| -
+| Step 8+16 (monitoring)
+| Missing monitoring details, where to go to check for "error rate" and "latency spike", how to judge the data. Text copy or screenshots needed to illustrate what to look for and where, along with instruction for capturing evidence.
+
+| -
+| Step 9~12 (risk factor)
+| Immediate deployment of the new version to the now-inactive colour-side runs risk of being unable to roll-back in a timely manner if unforseen issues come up following release. Recommendation: drop the update to inactive-colour, and either separate that out to a separate Operation, or simply leave the old version in-place on the inactive side (to be replace on the next/following release).
+
+| 12. Rollback
+| Escalation note
+| All required details for executation-step judgements are required to be present in the Operation Template. Escalation should be reserved for exceptional cases only, where it is genuinely not possible to make a clear judgement of actions.
++
+Additionally, all rollback steps are required to have been pre-tested in a pre-production environment. Impact-testing as part of the operation is not appropriate. Rollback instructions must be trustable as-is.
+
+| 12. Rollback
+| Step definition
+| Steps should be broken down, same manner as in Section 11, with appropriate CHECK/CHANGE markers, monitoring, gathering of evidence, etc.
+
+| -
+| Image Patch
+| "Use workflow from:" instruction is ambiguous. The exact details for how to judge the necessary inputs/commands/scripts need to be clearly stated such that even a new and/or inexperieced staff member can safely make any necessary judgement call and execute correctly.
+
+| 13. Post-Op Monitoring
+| Monitoring Duration
+| The monitoring duration should be fixed. Again, if this differs per-environment, this should be fixed in the environment-specific template documents.
+
+| 14. Test Evidence
+| Test evidence
+| Test evidence is required for templated operations (Rollout + Rollback).
+
+| 15. Known Risks & Improvements
+| Risks
+| This process is genuinely considered 100% risk-free? This does not sound right.
+
+|===
