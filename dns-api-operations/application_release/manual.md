@@ -1,6 +1,6 @@
 # ⚙️ Release Operation Manual — DNS API Application Release
 
-> **Document Status:** [CPSDCM-XXXX](https://jira.rakuten-it.com/jira/browse/CPSDCM-XXXX) — `Draft`
+> **Document Status:** `{{OPERATION_TICKET_JIRA_LINK}}` — `Draft`
 > **Operation ID:** `CPSDCM-XXXX`
 > **Last Updated:** `YYYY-MM-DD`
 > **Initiator:** `{{OPERATOR_NAME}}`
@@ -32,7 +32,7 @@
 
 | Field                | Value                                                                 |
 |----------------------|-----------------------------------------------------------------------|
-| **Operation ticket** | [CPSDCM-XXXX](https://jira.rakuten-it.com/jira/browse/CPSDCM-XXXX)   |
+| **Operation ticket** | `{{OPERATION_TICKET_JIRA_LINK}}`   |
 | **Summary**          | Release of a newer version of the DNS API to the DNS API `{{ENV}}` environment with schema incorporation (if applicable), data patches (if applicable) and image update |
 | **Details**          | An upgraded version of the DNS API will be released to the DNS API `{{ENV}}` environment. It will consist of bug fixes and improvements. The process may or may not include schema incorporation and data patches, as not every release consists of schema changes/updates. |
 | **Release Note — What's changed? (if applicable)** | `{{RELEASE_NOTES_LINK}}` |
@@ -83,8 +83,8 @@
 | `{{RELEASE_NOTES_LINK}}` | Link to the release notes of this release | https://confluence.rakuten-it.com/confluence/spaces/UCP/pages/6210496246/DNS+API+Release+Notes+v1.0.0 | ❌ |
 | `{{ENV}}` | Environment for which this operation is being performed | `PROD` | ❌ |
 | `{{ENV_DOMAIN}}` | Domain of the environment that can be used for API calls | `dns-api.r-local.net` | ❌ |
-| `{{CONFIG_REPO_DOMAIN}}` | HTTPS Link needed to access the `apollo-automation` repo | https://github.com/Core-Resource-Group/apollo-automation.git | ❌ |
-| `{{ACTIONS_WORKFLOW_TAG}}` | Short Commit hash of the tag whose GitHub Actions workflows would be run | ` af44fae` | ❌ |
+| `{{CONFIG_REPO_DOMAIN}}` | HTTPS Link needed to access the `apollo-automation` repo | https://github.com/Core-Resource-Group/apollo-automation | ❌ |
+| `{{ACTIONS_WORKFLOW_TAG}}` | Name of the GHE tag whose GitHub Actions workflows would be run | `frozen-workflow-v1` | ❌ |
 | `{{ACTIONS_WORKFLOW_TAG_LINK}}` | Link to the GHE tag whose GitHub Actions workflows would be run | https://github.com/Core-Resource-Group/apollo-automation/releases/tag/frozen-workflow-v1 | ❌ |
 | `{{APP_ROLLOUT_TAG_LINK}}` | Link to the GHE tag for the application release | https://github.com/Core-Resource-Group/apollo/releases/tag/v1.1.0 | ❌ |
 | `{{CONFIG_ROLLOUT_COMMIT_HASH}}` | Full Commit hash of the rollout tag in the `apollo-automation` repo | `182248ff3e0cd46d572d0306bb62e365ace489ed` | ❌ |
@@ -100,7 +100,6 @@
 | `{{IS_DATA_PATCH_NEEDED}}` | To be selected if any data patches need to be made | ✅/❌ | ❌ |
 | `{{IS_IMAGE_UPDATE_NEEDED}}` | To be selected if the deployment images are going to be updated | ✅/❌ | ❌ |
 | `{{IS_TRAFFIC_REROUTE_NEEDED}}` | To be selected if the traffic is to be switched to the color that was released to after release - Present because we may release a version to one side and route traffic to it. Later on, we may release the same version to the other side as part of another operation to get the versions synced across sides. This operation does not require a traffic reroute. This field is for such a case. | ✅/❌ | ❌ |
-| `{{AZ_1}}, {{AZ_2}}, etc.` | Availability zones to be whitelisted — AZ to be added to the list of supported domains | `euc1a,jpc1a` | ❌ |
 | `{{DB_PATCH_FILE_PATH}}` | Path of the DB patch file relative to the `apollo-automation` repo root | `operations/rollout.cql` | ❌ |
 | `{{DB_ROLLBACK_PATCH_FILE_PATH}}` | Path of the DB rollback patch file relative to the `apollo-automation` repo root | `operations/rollback.cql` | ❌ |
 | `{{ACTIVE_CLUSTER}}` (Active) | Active CaaS Cluster to deploy to | `jpe1-caas1-prod2` | ❌ |
@@ -358,7 +357,7 @@ All checks above must pass before proceeding to Section 8.
 | 2  | Ensure that within commit `{{CONFIG_ROLLOUT_COMMIT_HASH}}`, ensure that `{{DB_PATCH_FILE_PATH}}` and `{{DB_ROLLBACK_PATCH_FILE_PATH}}` exist and their contents are subjected to a visual inspection and an approval process                             | Initiator  | ❌     |
 | 3  | All variable parameters validated                                  | Initiator  | ❌     |
 | 4  | Operator acknowledges pre-validation steps (Section 6) completed with expected result before executing change | Operator | ❌ |
-| 5  | Operator acknowledges that the GHE Commit hash linked to `{{ACTIONS_WORKFLOW_TAG_LINK}}` is ` af44fae` | Operator | ❌ |
+| 5  | Operator acknowledges that the GHE Commit hash linked to `{{ACTIONS_WORKFLOW_TAG_LINK}}` is `frozen-workflow-v1` | Operator | ❌ |
 | 6  | Buddy acknowledges pre-validation steps (Section 6) completed with expected result before executing change | Buddy | ❌ |
 | 7  | On-call engineer is available and notified                         | Team Lead  | ❌     |
 | 8  | Announcement sent to all required channels (Section 5)             | Initiator  | ❌     |
@@ -654,9 +653,10 @@ gateway-app-gateway-86598f8c96-f6vjk   1/1     Running   0          345d
 **Legend**
 
 - **`{{TENANT}}`:** A valid OneCloud tenant
-- **`{{ZONE}}`:** The DNS zone under which we wish to create records. Format: `{{TENANT}}.{{AZ_1}}/{{AZ_2}}/....dcnw.rakuten.`.
-- **`{{VALID_IP_LINKED_TO_PASSED_TENANT_IN_THE_PASSED_AZ}}`:** IP from a subnet assigned to the `{{TENANT}}` in `{{AZ_1}}/{{AZ_2}}/...`.
-- **`{{ANOTHER_VALID_IP_LINKED_TO_PASSED_TENANT_IN_THE_PASSED_AZ}}`:** Another IP from a subnet assigned to the `{{TENANT}}` in `{{AZ_1}}/{{AZ_2}}/...`.
+- **`{{AZ}}`:** A valid whitelisted availability zone
+- **`{{ZONE}}`:** The DNS zone under which we wish to create records. Format: `{{TENANT}}.{{AZ}}.dcnw.rakuten.`.
+- **`{{VALID_IP_LINKED_TO_PASSED_TENANT_IN_THE_PASSED_AZ}}`:** IP from a subnet assigned to the `{{TENANT}}` in `{{AZ}}`.
+- **`{{ANOTHER_VALID_IP_LINKED_TO_PASSED_TENANT_IN_THE_PASSED_AZ}}`:** Another IP from a subnet assigned to the `{{TENANT}}` in `{{AZ}}`.
 
 Link: `{{CONFIG_REPO_DOMAIN}}/actions/workflows/smoke-test-dns-api.yml`
 
@@ -852,9 +852,9 @@ gateway-app-gateway-86598f8c96-f6vjk   1/1     Running   0          345d
 **Legend**
 
 - **`{{TENANT}}`:** A valid OneCloud tenant
-- **`{{ZONE}}`:** The DNS zone under which we wish to create records. Format: `{{TENANT}}.{{AZ_1}}/{{AZ_2}}/....dcnw.rakuten.`.
-- **`{{VALID_IP_LINKED_TO_PASSED_TENANT_IN_THE_PASSED_AZ}}`:** IP from a subnet assigned to the `{{TENANT}}` in `{{AZ_1}}/{{AZ_2}}/...`.
-- **`{{ANOTHER_VALID_IP_LINKED_TO_PASSED_TENANT_IN_THE_PASSED_AZ}}`:** Another IP from a subnet assigned to the `{{TENANT}}` in `{{AZ_1}}/{{AZ_2}}/...`.
+- **`{{ZONE}}`:** The DNS zone under which we wish to create records. Format: `{{TENANT}}.{{AZ}}.dcnw.rakuten.`.
+- **`{{VALID_IP_LINKED_TO_PASSED_TENANT_IN_THE_PASSED_AZ}}`:** IP from a subnet assigned to the `{{TENANT}}` in `{{AZ}}`.
+- **`{{ANOTHER_VALID_IP_LINKED_TO_PASSED_TENANT_IN_THE_PASSED_AZ}}`:** Another IP from a subnet assigned to the `{{TENANT}}` in `{{AZ}}`.
 
 Link: `{{CONFIG_REPO_DOMAIN}}/actions/workflows/smoke-test-dns-api.yml`
 
@@ -1091,9 +1091,10 @@ gateway-app-gateway-86598f8c96-f6vjk   1/1     Running   0          345d
 **Legend**
 
 - **`{{TENANT}}`:** A valid OneCloud tenant
-- **`{{ZONE}}`:** The DNS zone under which we wish to create records. Format: `{{TENANT}}.{{AZ_1}}/{{AZ_2}}/....dcnw.rakuten.`.
-- **`{{VALID_IP_LINKED_TO_PASSED_TENANT_IN_THE_PASSED_AZ}}`:** IP from a subnet assigned to the `{{TENANT}}` in `{{AZ_1}}/{{AZ_2}}/...`.
-- **`{{ANOTHER_VALID_IP_LINKED_TO_PASSED_TENANT_IN_THE_PASSED_AZ}}`:** Another IP from a subnet assigned to the `{{TENANT}}` in `{{AZ_1}}/{{AZ_2}}/...`.
+- **`{{AZ}}`:** A valid whitelisted availability zone
+- **`{{ZONE}}`:** The DNS zone under which we wish to create records. Format: `{{TENANT}}.{{AZ}}.dcnw.rakuten.`.
+- **`{{VALID_IP_LINKED_TO_PASSED_TENANT_IN_THE_PASSED_AZ}}`:** IP from a subnet assigned to the `{{TENANT}}` in `{{AZ}}`.
+- **`{{ANOTHER_VALID_IP_LINKED_TO_PASSED_TENANT_IN_THE_PASSED_AZ}}`:** Another IP from a subnet assigned to the `{{TENANT}}` in `{{AZ}}`.
 
 Link: `{{CONFIG_REPO_DOMAIN}}/actions/workflows/smoke-test-dns-api.yml`
 

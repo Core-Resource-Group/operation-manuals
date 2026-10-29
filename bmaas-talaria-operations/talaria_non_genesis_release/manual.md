@@ -1,6 +1,6 @@
 # ⚙️ Release Operation Manual — Talaria
 
- **Document Status:** [CPSDCM-XXXX](https://jira.rakuten-it.com/jira/browse/CPSDCM-XXXX) — `Draft`
+ **Document Status:** `{{OPERATION_TICKET_JIRA_LINK}}` — `Draft`
  **Operation ID:** `OPS-XXXX`
  **Last Updated:** YYYY-MM-DD
  **Initiator:** `{{OPERATOR_NAME}}`
@@ -31,7 +31,7 @@
 
 | Field                | Value                                                                 |
 |----------------------|-----------------------------------------------------------------------|
-| **Operation ticket** | [CPSDCM-XXXX](https://jira.rakuten-it.com/jira/browse/CPSDCM-XXXX)   |
+| **Operation ticket** | `{{OPERATION_TICKET_JIRA_LINK}}`   |
 | **Summary**          | Release of a newer version of the Talaria API to `{{AZS}}`, with a chef org sync, database update, and rollout of the new application version. |
 | **Details**          | An upgraded version of the Talaria API will be released to `{{AZS}}`. The process may or may not include a database update, as not every release requires one. |
 | **Release Note — What's changed?** | `{{RELEASE_NOTES_LINK}}` |
