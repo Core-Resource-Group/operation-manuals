@@ -357,7 +357,7 @@ All checks above must pass before proceeding to Section 8.
 | 2  | Ensure that within commit `{{CONFIG_ROLLOUT_COMMIT_HASH}}`, ensure that `{{DB_PATCH_FILE_PATH}}` and `{{DB_ROLLBACK_PATCH_FILE_PATH}}` exist and their contents are subjected to a visual inspection and an approval process                             | Initiator  | ❌     |
 | 3  | All variable parameters validated                                  | Initiator  | ❌     |
 | 4  | Operator acknowledges pre-validation steps (Section 6) completed with expected result before executing change | Operator | ❌ |
-| 5  | Operator acknowledges that the GHE Commit hash linked to `{{ACTIONS_WORKFLOW_TAG_LINK}}` is `frozen-workflow-v1` | Operator | ❌ |
+| 5  | Operator acknowledges that the GHE Commit hash linked to `{{ACTIONS_WORKFLOW_TAG_LINK}}` is `af44fae` | Operator | ❌ |
 | 6  | Buddy acknowledges pre-validation steps (Section 6) completed with expected result before executing change | Buddy | ❌ |
 | 7  | On-call engineer is available and notified                         | Team Lead  | ❌     |
 | 8  | Announcement sent to all required channels (Section 5)             | Initiator  | ❌     |
