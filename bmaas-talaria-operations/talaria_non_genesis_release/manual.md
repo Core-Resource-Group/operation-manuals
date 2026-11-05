@@ -288,6 +288,11 @@ If even one of the below is met, the operation must be aborted and rolled back:
  **If `{{CHEF_ORGS_ALREADY_SYNCED}}` = `Yes`:** chef orgs for `{{ENVIRONMENT}}` are already in sync — skip this step and proceed to [Step 2](#step-2--switch-and-release-talaria).
  **If `{{CHEF_ORGS_ALREADY_SYNCED}}` = `No`:** continue below and run this step.
 
+This pipeline includes the following steps
+1. Genesis Python script execution targeting the passed DC and source branch to sync the cookbooks
+
+![Jenkins Chef Orgs Sync Pipeline Input](https://confluence.rakuten-it.com/confluence/download/attachments/6944760095/syncChefOrgs.png)
+
 Build the `sync_chef_orgs` Jenkins pipeline with these common parameters:
 
 ```
@@ -330,6 +335,14 @@ NOTIFY_SLACK: {UNCHECKED}
 
 **Switch the Talaria version** — Jenkins URL: `{{SWITCH_APPLICATION_VERSION_JENKINS_URL}}` (same job regardless of `{{ENVIRONMENT}}`)
 
+This pipeline includes the following steps
+1. SSH into the tkt repo server
+2. Parameter Validation
+3. Target Directory Validation
+4. Version Switch
+
+![Jenkins BMaaS Application Version Switch Pipeline Input](https://confluence.rakuten-it.com/confluence/download/attachments/6944760095/switchBMaaSApplicationVersion.png)
+
 **If `{{ENVIRONMENT}}` = `QA`:**
 ```
 COMPONENT: talaria
@@ -348,6 +361,12 @@ REVISION: {EMPTY}
 
 **Update the Talaria Database**
 
+This pipeline includes the following steps
+1. Checkout of the bdd-jenkins repository
+2. Database updates using SSH and Chef Cookbooks
+
+![Jenkins Talaria Database Update Pipeline Input](https://confluence.rakuten-it.com/confluence/download/attachments/6944760095/updateTalariaDatabase.png)
+
 **If `{{ENVIRONMENT}}` = `QA`:** Jenkins URL: `{{UPDATE_TALARIA_DATABASE_QA_JENKINS_URL}}`
 ```
 UPDATE_DATABASE: QA
@@ -361,6 +380,13 @@ DRY_RUN: {UNCHECKED}
 ```
 
 **Release Talaria**
+
+This pipeline includes the following steps
+1. Building of target server list (Talaria servers)
+2. Parameter Validation
+3. Rollouts in all target servers using SSH and Chef Cookbooks
+
+![Jenkins Talaria Release Pipeline Input](https://confluence.rakuten-it.com/confluence/download/attachments/6944760095/talariaRelease.png)
 
 **If `{{ENVIRONMENT}}` = `QA`:** Jenkins URL: `{{RELEASE_TALARIA_QA_JENKINS_URL}}` — run once per data center:
 - `TARGET_SERVERS: JPE1Z` / `DRY_RUN: {UNCHECKED}`
@@ -422,11 +448,20 @@ Initiate rollback if **any** of the following conditions are met (identical to S
 
 ### 12.2 Rollback Steps
 
-**R1 — Switch and release Talaria (old version)**
+#### R1 — Switch Talaria to the old version
+
+Jenkins URL: `{{SWITCH_APPLICATION_VERSION_JENKINS_URL}}` (same job regardless of `{{ENVIRONMENT}}`)
+
+This pipeline includes the following steps
+1. SSH into the tkt repo server
+2. Parameter Validation
+3. Target Directory Validation
+4. Version Switch
+
+![Jenkins BMaaS Application Version Switch Pipeline Input](https://confluence.rakuten-it.com/confluence/download/attachments/6944760095/switchBMaaSApplicationVersion.png)
 
 **If `{{ENVIRONMENT}}` = `QA`:**
 ```
-Jenkins URL: {{SWITCH_APPLICATION_VERSION_JENKINS_URL}}
 COMPONENT: talaria
 VERSION_TYPE: latest
 VERSION: {{CURRENT_TALARIA_VERSION}}
@@ -435,31 +470,48 @@ REVISION: {EMPTY}
 
 **If `{{ENVIRONMENT}}` = `BDD`:**
 ```
-Jenkins URL: {{SWITCH_APPLICATION_VERSION_JENKINS_URL}}
 COMPONENT: talaria
 VERSION_TYPE: stable
 VERSION: {{CURRENT_TALARIA_VERSION}}
 REVISION: {EMPTY}
 ```
 
-**If `{{ENVIRONMENT}}` = `QA`:**
+#### R2 — Update the Talaria Database (old version)
+
+This pipeline includes the following steps
+1. Checkout of the bdd-jenkins repository
+2. Database updates using SSH and Chef Cookbooks
+
+![Jenkins Talaria Database Update Pipeline Input](https://confluence.rakuten-it.com/confluence/download/attachments/6944760095/updateTalariaDatabase.png)
+
+**If `{{ENVIRONMENT}}` = `QA`:** Jenkins URL: `{{UPDATE_TALARIA_DATABASE_QA_JENKINS_URL}}`
 ```
-Jenkins URL: {{UPDATE_TALARIA_DATABASE_QA_JENKINS_URL}}
 UPDATE_DATABASE: QA
 DRY_RUN: {UNCHECKED}
 ```
-Release using `{{RELEASE_TALARIA_QA_JENKINS_URL}}` (`DRY_RUN: {UNCHECKED}`): `TARGET_SERVERS: JPE1Z` then `TARGET_SERVERS: JPE2Z`.
 
-**If `{{ENVIRONMENT}}` = `BDD`:**
+**If `{{ENVIRONMENT}}` = `BDD`:** Jenkins URL: `{{UPDATE_TALARIA_DATABASE_BDD_JENKINS_URL}}`
 ```
-Jenkins URL: {{UPDATE_TALARIA_DATABASE_BDD_JENKINS_URL}}
 UPDATE_DATABASE: JP1
 DRY_RUN: {UNCHECKED}
 ```
-Release using `{{RELEASE_TALARIA_BDD_JENKINS_URL}}` (`DRY_RUN: {UNCHECKED}`): `TARGET_SERVERS: HND1` then `TARGET_SERVERS: HND2`.
 
-**R2 — Post-rollback task**
-- [ ] Create trouble report.
+#### R3 — Release Talaria (old version)
+
+This pipeline includes the following steps
+1. Building of target server list (Talaria servers)
+2. Parameter Validation
+3. Rollouts in all target servers using SSH and Chef Cookbooks
+
+![Jenkins Talaria Release Pipeline Input](https://confluence.rakuten-it.com/confluence/download/attachments/6944760095/talariaRelease.png)
+
+**If `{{ENVIRONMENT}}` = `QA`:** Jenkins URL: `{{RELEASE_TALARIA_QA_JENKINS_URL}}` — run once per data center:
+- `TARGET_SERVERS: JPE1Z` / `DRY_RUN: {UNCHECKED}`
+- `TARGET_SERVERS: JPE2Z` / `DRY_RUN: {UNCHECKED}`
+
+**If `{{ENVIRONMENT}}` = `BDD`:** Jenkins URL: `{{RELEASE_TALARIA_BDD_JENKINS_URL}}` — run once per data center:
+- `TARGET_SERVERS: HND1` / `DRY_RUN: {UNCHECKED}`
+- `TARGET_SERVERS: HND2` / `DRY_RUN: {UNCHECKED}`
 
 ### 12.3 RTO (Recovery Time Objective)
 

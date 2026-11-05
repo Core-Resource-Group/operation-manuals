@@ -288,6 +288,11 @@ If even one of the below is met, the operation must be aborted and rolled back:
  **If `{{CHEF_ORGS_ALREADY_SYNCED}}` = `Yes`:** chef orgs for `{{ENVIRONMENT}}` are already in sync — skip this step and proceed to [Step 2](#step-2--switch-and-release-keraunos).
  **If `{{CHEF_ORGS_ALREADY_SYNCED}}` = `No`:** continue below and run this step.
 
+This pipeline includes the following steps
+1. Genesis Python script execution targeting the passed DC and source branch to sync the cookbooks
+
+![Jenkins Chef Orgs Sync Pipeline Input](https://confluence.rakuten-it.com/confluence/download/attachments/6948787296/syncChefOrgs.png)
+
 Build the `sync_chef_orgs` Jenkins pipeline with these common parameters:
 
 ```
@@ -330,6 +335,14 @@ NOTIFY_SLACK: {UNCHECKED}
 
 **Switch the Keraunos version** — Jenkins URL: `{{SWITCH_APPLICATION_VERSION_JENKINS_URL}}` (same job regardless of `{{ENVIRONMENT}}`)
 
+This pipeline includes the following steps
+1. SSH into the tkt repo server
+2. Parameter Validation
+3. Target Directory Validation
+4. Version Switch
+
+![Jenkins BMaaS Application Version Switch Pipeline Input](https://confluence.rakuten-it.com/confluence/download/attachments/6948787296/switchBMaaSApplicationVersion.png)
+
 **If `{{ENVIRONMENT}}` = `QA`:**
 ```
 COMPONENT: keraunos
@@ -348,6 +361,12 @@ REVISION: {EMPTY}
 
 **Update the Keraunos Database**
 
+This pipeline includes the following steps
+1. Checkout of the bdd-jenkins repository
+2. Database updates using SSH and Chef Cookbooks
+
+![Jenkins Keraunos Database Update Pipeline Input](https://confluence.rakuten-it.com/confluence/download/attachments/6948787296/updateKeraunosDatabase.png)
+
 **If `{{ENVIRONMENT}}` = `QA`:** Jenkins URL: `{{UPDATE_KERAUNOS_DATABASE_QA_JENKINS_URL}}`
 ```
 UPDATE_DATABASE: QA
@@ -361,6 +380,13 @@ DRY_RUN: {UNCHECKED}
 ```
 
 **Release Keraunos**
+
+This pipeline includes the following steps
+1. Building of target server list (Keraunos servers)
+2. Parameter Validation
+3. Rollouts in all target servers using SSH and Chef Cookbooks
+
+![Jenkins Keraunos Release Pipeline Input](https://confluence.rakuten-it.com/confluence/download/attachments/6948787296/keraunosRelease.png)
 
 **If `{{ENVIRONMENT}}` = `QA`:** Jenkins URL: `{{RELEASE_KERAUNOS_QA_JENKINS_URL}}` — run once per data center:
 - `TARGET_SERVERS: JPE1Z` / `DRY_RUN: {UNCHECKED}`
@@ -421,11 +447,20 @@ Initiate rollback if **any** of the following conditions are met (identical to S
 
 ### 12.2 Rollback Steps
 
-**R1 — Switch and release Keraunos (old version)**
+#### R1 — Switch Keraunos to the old version
+
+Jenkins URL: `{{SWITCH_APPLICATION_VERSION_JENKINS_URL}}` (same job regardless of `{{ENVIRONMENT}}`)
+
+This pipeline includes the following steps
+1. SSH into the tkt repo server
+2. Parameter Validation
+3. Target Directory Validation
+4. Version Switch
+
+![Jenkins BMaaS Application Version Switch Pipeline Input](https://confluence.rakuten-it.com/confluence/download/attachments/6948787296/switchBMaaSApplicationVersion.png)
 
 **If `{{ENVIRONMENT}}` = `QA`:**
 ```
-Jenkins URL: {{SWITCH_APPLICATION_VERSION_JENKINS_URL}}
 COMPONENT: keraunos
 VERSION_TYPE: latest
 VERSION: {{CURRENT_KERAUNOS_VERSION}}
@@ -434,31 +469,48 @@ REVISION: {EMPTY}
 
 **If `{{ENVIRONMENT}}` = `BDD`:**
 ```
-Jenkins URL: {{SWITCH_APPLICATION_VERSION_JENKINS_URL}}
 COMPONENT: keraunos
 VERSION_TYPE: stable
 VERSION: {{CURRENT_KERAUNOS_VERSION}}
 REVISION: {EMPTY}
 ```
 
-**If `{{ENVIRONMENT}}` = `QA`:**
+#### R2 — Update the Keraunos Database (old version)
+
+This pipeline includes the following steps
+1. Checkout of the bdd-jenkins repository
+2. Database updates using SSH and Chef Cookbooks
+
+![Jenkins Keraunos Database Update Pipeline Input](https://confluence.rakuten-it.com/confluence/download/attachments/6948787296/updateKeraunosDatabase.png)
+
+**If `{{ENVIRONMENT}}` = `QA`:** Jenkins URL: `{{UPDATE_KERAUNOS_DATABASE_QA_JENKINS_URL}}`
 ```
-Jenkins URL: {{UPDATE_KERAUNOS_DATABASE_QA_JENKINS_URL}}
 UPDATE_DATABASE: QA
 DRY_RUN: {UNCHECKED}
 ```
-Release using `{{RELEASE_KERAUNOS_QA_JENKINS_URL}}` (`DRY_RUN: {UNCHECKED}`): `TARGET_SERVERS: JPE1Z` then `TARGET_SERVERS: JPE2Z`.
 
-**If `{{ENVIRONMENT}}` = `BDD`:**
+**If `{{ENVIRONMENT}}` = `BDD`:** Jenkins URL: `{{UPDATE_KERAUNOS_DATABASE_BDD_JENKINS_URL}}`
 ```
-Jenkins URL: {{UPDATE_KERAUNOS_DATABASE_BDD_JENKINS_URL}}
 UPDATE_DATABASE: JP1
 DRY_RUN: {UNCHECKED}
 ```
-Release using `{{RELEASE_KERAUNOS_BDD_JENKINS_URL}}` (`DRY_RUN: {UNCHECKED}`): `TARGET_SERVERS: HND1` then `TARGET_SERVERS: HND2`.
 
-**R2 — Post-rollback task**
-- [ ] Create trouble report.
+#### R3 — Release Keraunos (old version)
+
+This pipeline includes the following steps
+1. Building of target server list (Keraunos servers)
+2. Parameter Validation
+3. Rollouts in all target servers using SSH and Chef Cookbooks
+
+![Jenkins Keraunos Release Pipeline Input](https://confluence.rakuten-it.com/confluence/download/attachments/6948787296/keraunosRelease.png)
+
+**If `{{ENVIRONMENT}}` = `QA`:** Jenkins URL: `{{RELEASE_KERAUNOS_QA_JENKINS_URL}}` — run once per data center:
+- `TARGET_SERVERS: JPE1Z` / `DRY_RUN: {UNCHECKED}`
+- `TARGET_SERVERS: JPE2Z` / `DRY_RUN: {UNCHECKED}`
+
+**If `{{ENVIRONMENT}}` = `BDD`:** Jenkins URL: `{{RELEASE_KERAUNOS_BDD_JENKINS_URL}}` — run once per data center:
+- `TARGET_SERVERS: HND1` / `DRY_RUN: {UNCHECKED}`
+- `TARGET_SERVERS: HND2` / `DRY_RUN: {UNCHECKED}`
 
 ### 12.3 RTO (Recovery Time Objective)
 
