@@ -77,8 +77,6 @@
 |---|---|---|:---:|
 | `{{OPERATION_TICKET_JIRA_LINK}}` | Jira link to the operation ticket | https://jira.rakuten-it.com/jira/browse/CPSDCM-XXXX | ❌ |
 | `{{DATE_TIME}}` | Date and time of the operation. Include the start and end time. | `2026-03-21 1400-1600 hrs JST` | ❌ |
-| `{{RISK_LEVEL}}` | Risk level of the operation, taking into account service and operational risk | `MEDIUM` | ❌ |
-| `{{USER_IMPACT}}` | Impact on existing users if the operation is performed | ✅(Explain)/❌ | ❌ |
 | `{{OPERATOR_NAME}}` / `{{BUDDY_NAME}}` | Operator of operation and Buddy (checker) | `ar-srinivass01 / xulun01` | ❌ |
 | `{{RELEASE_NOTES_LINK}}` | Link to the release notes of this release | https://confluence.rakuten-it.com/confluence/spaces/UCP/pages/6210496246/DNS+API+Release+Notes+v1.0.0 | ❌ |
 | `{{ENV}}` | Environment for which this operation is being performed | `PROD` | ❌ |
@@ -174,10 +172,10 @@ To incorporate new bug fixes and enhancements, data patches, version upgrades an
 {{ENV}}
 
 ■ Impact
-{{USER_IMPACT}}
+❌
 
 ■ Risk
-{{RISK_LEVEL}}
+MEDIUM
 
 ■ Target Component
 CaaS Clusters: {{ACTIVE_CLUSTER}} (Active) and {{STANDBY_CLUSTER}} (Standby)

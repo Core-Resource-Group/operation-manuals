@@ -73,8 +73,6 @@
 |---|---|---|:---:|
 | `{{OPERATION_TICKET_JIRA_LINK}}` | Jira link to the operation ticket | https://jira.rakuten-it.com/jira/browse/CPSDCM-XXXX | ❌ |
 | `{{DATE_TIME}}` | Date and time of the operation. Include the start and end time. | `2026-03-21 1400-1600 hrs JST` | ❌ |
-| `{{RISK_LEVEL}}` | Risk level of the operation, taking into account service and operational risk | `MEDIUM` | ❌ |
-| `{{USER_IMPACT}}` | Impact on existing users if the operation is performed |  ✅(Explain)/❌ | ❌ |
 | `{{OPERATOR_NAME}}` / `{{BUDDY_NAME}}` | Operator of operation and Buddy (checker) | `ar-srinivass01 / xulun01` | ❌ |
 | `{{ENV}}` | Environment for which this operation is being performed | `PROD` | ❌ |
 | `{{ENV_DOMAIN}}` | Domain of the environment that can be used for API calls | `dns-api.r-local.net` | ❌ |
@@ -153,10 +151,10 @@ To substitute the old NMC (an IPAM tool used by the DNS API) with a new one.
 {{ENV}}
 
 ■ Impact
-{{USER_IMPACT}}
+❌
 
 ■ Risk
-{{RISK_LEVEL}}
+MEDIUM
 
 ■ Target Component
 CaaS Clusters: {{ACTIVE_CLUSTER}} (Active) and {{STANDBY_CLUSTER}} (Standby)
@@ -292,47 +290,7 @@ If even one of the below is met, the operation must be aborted and rolled back:
 
 ## 11. Operations Procedure
 
-### Step 1 — Active Cluster: Application of Temporary Manifest
-
-> **Action type:** CHANGE
->
-> **Why:** So that in the time between the DB patch and the cache refresh, both NMCs are accessible from the deployments in the active cluster.
->
-> **Scope:** Applies a temporary manifest containing a network policy that permits the IPs of both, the old and new NMCs. No application pods are touched.
->
-> **Abortion:** ✅ Safe to abort — the temporary manifest only adds access to the new NMC alongside the existing old-NMC access; if aborted, apply the rollback manifest (Section 12.2) and escalate per Section 10.
->
-> **Automation Level:** Pipeline (GitHub Actions Workflow)
-
-Link: `{{CONFIG_REPO_DOMAIN}}/actions/workflows/apply-k8s-manifest.yml`
-
-The below workflow with the passed values includes the following steps:
-1. Checkout of the passed commit hash
-2. Restoration of the git-crypt symmetric key and unlocking of the repository
-3. Validation of the manifest (path validation, validation of existence in the repo, format validation)
-4. Application of the manifest
-5. Locking of the repository
-
-**Appearance:**
-
-![GitHub Actions K8s Manifest Application Workflow Input](https://confluence.rakuten-it.com/confluence/download/attachments/6941345413/k8smanifestapplication.png)
-
-Click "Run Workflow" and set:
-- **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
-- **Cluster to apply to:** `{{ACTIVE_CLUSTER}}`
-- **Full Configuration commit hash to check out (blank = default branch/tag):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
-- **Path to the Kubernetes manifest YAML to apply, relative to the repository root:** `{{K8S_TEMPORARY_MANIFEST_FILE_PATH}}`
-
-**Expected Result:** Success.
-**Validation:** Confirm the command completed with no error output on the GH Actions Console.
-
-| ✅ Condition to proceed to the next step | ⛔ Action if condition not met |
-|---|---|
-| Manifest applied without error | Do not proceed — investigate the failure by checking the contents of the `{{K8S_TEMPORARY_MANIFEST_FILE_PATH}}` in the repo and escalate per Section 10 if needed. |
-
----
-
-### Step 2 — Standby Cluster: Application of Temporary Manifest
+### Step 1 — Standby Cluster: Application of Temporary Manifest
 
 > **Action type:** CHANGE
 >
@@ -360,6 +318,46 @@ The below workflow with the passed values includes the following steps:
 Click "Run Workflow" and set:
 - **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
 - **Cluster to apply to:** `{{STANDBY_CLUSTER}}`
+- **Full Configuration commit hash to check out (blank = default branch/tag):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
+- **Path to the Kubernetes manifest YAML to apply, relative to the repository root:** `{{K8S_TEMPORARY_MANIFEST_FILE_PATH}}`
+
+**Expected Result:** Success.
+**Validation:** Confirm the command completed with no error output on the GH Actions Console.
+
+| ✅ Condition to proceed to the next step | ⛔ Action if condition not met |
+|---|---|
+| Manifest applied without error | Do not proceed — investigate the failure by checking the contents of the `{{K8S_TEMPORARY_MANIFEST_FILE_PATH}}` in the repo and escalate per Section 10 if needed. |
+
+---
+
+### Step 2 — Active Cluster: Application of Temporary Manifest
+
+> **Action type:** CHANGE
+>
+> **Why:** So that in the time between the DB patch and the cache refresh, both NMCs are accessible from the deployments in the active cluster.
+>
+> **Scope:** Applies a temporary manifest containing a network policy that permits the IPs of both, the old and new NMCs. No application pods are touched.
+>
+> **Abortion:** ✅ Safe to abort — the temporary manifest only adds access to the new NMC alongside the existing old-NMC access; if aborted, apply the rollback manifest (Section 12.2) and escalate per Section 10.
+>
+> **Automation Level:** Pipeline (GitHub Actions Workflow)
+
+Link: `{{CONFIG_REPO_DOMAIN}}/actions/workflows/apply-k8s-manifest.yml`
+
+The below workflow with the passed values includes the following steps:
+1. Checkout of the passed commit hash
+2. Restoration of the git-crypt symmetric key and unlocking of the repository
+3. Validation of the manifest (path validation, validation of existence in the repo, format validation)
+4. Application of the manifest
+5. Locking of the repository
+
+**Appearance:**
+
+![GitHub Actions K8s Manifest Application Workflow Input](https://confluence.rakuten-it.com/confluence/download/attachments/6941345413/k8smanifestapplication.png)
+
+Click "Run Workflow" and set:
+- **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
+- **Cluster to apply to:** `{{ACTIVE_CLUSTER}}`
 - **Full Configuration commit hash to check out (blank = default branch/tag):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
 - **Path to the Kubernetes manifest YAML to apply, relative to the repository root:** `{{K8S_TEMPORARY_MANIFEST_FILE_PATH}}`
 
@@ -414,47 +412,7 @@ Click "Run Workflow" and set:
 
 ---
 
-### Step 4 — Active Cluster: Application of Final Manifest
-
-> **Action type:** CHANGE
->
-> **Why:** So that only the new NMC is made accessible from the deployments in the active cluster.
->
-> **Scope:** Applies the final manifest containing a network policy that permits the IPs of only the new NMC. No application pods are touched.
->
-> **Abortion:** ⚠️ Not a simple abortion — this step removes access to the old NMC; if aborted, apply the rollback data patch and the rollback manifest (Section 12.2) and escalate per Section 10.
->
-> **Automation Level:** Pipeline (GitHub Actions Workflow)
-
-Link: `{{CONFIG_REPO_DOMAIN}}/actions/workflows/apply-k8s-manifest.yml`
-
-The below workflow with the passed values includes the following steps:
-1. Checkout of the passed commit hash
-2. Restoration of the git-crypt symmetric key and unlocking of the repository
-3. Validation of the manifest (path validation, validation of existence in the repo, format validation)
-4. Application of the manifest
-5. Locking of the repository
-
-**Appearance:**
-
-![GitHub Actions K8s Manifest Application Workflow Input](https://confluence.rakuten-it.com/confluence/download/attachments/6941345413/k8smanifestapplication.png)
-
-After 5 minutes, Click "Run Workflow" and set:
-- **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
-- **Cluster to apply to:** `{{ACTIVE_CLUSTER}}`
-- **Full Configuration commit hash to check out (blank = default branch/tag):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
-- **Path to the Kubernetes manifest YAML to apply, relative to the repository root:** `{{K8S_MANIFEST_FILE_PATH}}`
-
-**Expected Result:** Success.
-**Validation:** Confirm the command completed with no error output on the GH Actions Console.
-
-| ✅ Condition to proceed to the next step | ⛔ Action if condition not met |
-|---|---|
-| Manifest applied without error | Do not proceed — investigate the failure by checking the contents of the `{{K8S_MANIFEST_FILE_PATH}}` in the repo and escalate per Section 10 if needed. |
-
----
-
-### Step 5 — Standby Cluster: Application of Final Manifest
+### Step 4 — Standby Cluster: Application of Final Manifest
 
 > **Action type:** CHANGE
 >
@@ -479,9 +437,49 @@ The below workflow with the passed values includes the following steps:
 
 ![GitHub Actions K8s Manifest Application Workflow Input](https://confluence.rakuten-it.com/confluence/download/attachments/6941345413/k8smanifestapplication.png)
 
-Click "Run Workflow" and set:
+After 5 minutes, Click "Run Workflow" and set:
 - **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
 - **Cluster to apply to:** `{{STANDBY_CLUSTER}}`
+- **Full Configuration commit hash to check out (blank = default branch/tag):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
+- **Path to the Kubernetes manifest YAML to apply, relative to the repository root:** `{{K8S_MANIFEST_FILE_PATH}}`
+
+**Expected Result:** Success.
+**Validation:** Confirm the command completed with no error output on the GH Actions Console.
+
+| ✅ Condition to proceed to the next step | ⛔ Action if condition not met |
+|---|---|
+| Manifest applied without error | Do not proceed — investigate the failure by checking the contents of the `{{K8S_MANIFEST_FILE_PATH}}` in the repo and escalate per Section 10 if needed. |
+
+---
+
+### Step 5 — Active Cluster: Application of Final Manifest
+
+> **Action type:** CHANGE
+>
+> **Why:** So that only the new NMC is made accessible from the deployments in the active cluster.
+>
+> **Scope:** Applies the final manifest containing a network policy that permits the IPs of only the new NMC. No application pods are touched.
+>
+> **Abortion:** ⚠️ Not a simple abortion — this step removes access to the old NMC; if aborted, apply the rollback data patch and the rollback manifest (Section 12.2) and escalate per Section 10.
+>
+> **Automation Level:** Pipeline (GitHub Actions Workflow)
+
+Link: `{{CONFIG_REPO_DOMAIN}}/actions/workflows/apply-k8s-manifest.yml`
+
+The below workflow with the passed values includes the following steps:
+1. Checkout of the passed commit hash
+2. Restoration of the git-crypt symmetric key and unlocking of the repository
+3. Validation of the manifest (path validation, validation of existence in the repo, format validation)
+4. Application of the manifest
+5. Locking of the repository
+
+**Appearance:**
+
+![GitHub Actions K8s Manifest Application Workflow Input](https://confluence.rakuten-it.com/confluence/download/attachments/6941345413/k8smanifestapplication.png)
+
+Click "Run Workflow" and set:
+- **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
+- **Cluster to apply to:** `{{ACTIVE_CLUSTER}}`
 - **Full Configuration commit hash to check out (blank = default branch/tag):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
 - **Path to the Kubernetes manifest YAML to apply, relative to the repository root:** `{{K8S_MANIFEST_FILE_PATH}}`
 

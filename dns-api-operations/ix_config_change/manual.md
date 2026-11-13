@@ -1,4 +1,4 @@
-# ⚙️ Release Operation Manual — DNS API I\*\*\*\*\*\*x Cutover
+# ⚙️ Release Operation Manual — DNS API DNS Software A Cutover
 
 > **Document Status:** `{{OPERATION_TICKET_JIRA_LINK}}` — `Draft`
 > **Operation ID:** `CPSDCM-XXXX`
@@ -33,8 +33,8 @@
 | Field                | Value                                                                 |
 |----------------------|-----------------------------------------------------------------------|
 | **Operation ticket** | `{{OPERATION_TICKET_JIRA_LINK}}`   |
-| **Summary**          | Cutover to a new I\*\*\*\*\*\*x server in the DNS API `{{ENV}}` environment. |
-| **Details**          | A cutover to a new I\*\*\*\*\*\*x server is necessary so that newer versions of the I\*\*\*\*\*\*x service can be made available. |
+| **Summary**          | Cutover to a new DNS Software A server in the DNS API `{{ENV}}` environment. |
+| **Details**          | A cutover to a new DNS Software A server is necessary so that newer versions of the DNS Software A service can be made available. |
 | **GHE Commit hash Link — Configuration (if applicable)** | `{{CONFIG_ROLLOUT_COMMIT_HASH_LINK}}` |
 
 ---
@@ -61,7 +61,7 @@
 - [x] **Other** — Describe: Direct data-patch rollout with a maintenance-mode gate
 
 > **Justification / Notes:**
-> This operation does not deploy application code and touches no pods. It involves setting a server in maintenance and the application of some K8s manifests and a Cassandra data patch. The old I\*\*\*\*\*\*x server is set in maintenance (i.e., it would only serve read requests and not write requests). After the DNS Group switches to the new I\*\*\*\*\*\*x server, a temporary network policy manifest is applied so that until the cache refreshes, both, the old and the new I\*\*\*\*\*\*x servers are accessible. Then, the DB data patch containing the configuration of the new I\*\*\*\*\*\*x server is applied. Once the cache is refreshed, the final network policy manifest is applied. Therefore, no downtime is seen.
+> This operation does not deploy application code and touches no pods. It involves setting a server in maintenance and the application of some K8s manifests and a Cassandra data patch. The old DNS Software A server is set in maintenance (i.e., it would only serve read requests and not write requests). After the DNS Group switches to the new DNS Software A server, a temporary network policy manifest is applied so that until the cache refreshes, both, the old and the new DNS Software A servers are accessible. Then, the DB data patch containing the configuration of the new DNS Software A server is applied. Once the cache is refreshed, the final network policy manifest is applied. Therefore, no downtime is seen.
 
 ---
 
@@ -73,8 +73,6 @@
 |---|---|---|:---:|
 | `{{OPERATION_TICKET_JIRA_LINK}}` | Jira link to the operation ticket | https://jira.rakuten-it.com/jira/browse/CPSDCM-XXXX | ❌ |
 | `{{DATE_TIME}}` | Date and time of the operation. Include the start and end time. | `2026-03-21 1400-1600 hrs JST` | ❌ |
-| `{{RISK_LEVEL}}` | Risk level of the operation, taking into account service and operational risk | `MEDIUM` | ❌ |
-| `{{USER_IMPACT}}` | Impact on existing users if the operation is performed |  Read-only access to records in the DNS server from the start of the operation until the cutover is complete | ❌ |
 | `{{OPERATOR_NAME}}` / `{{BUDDY_NAME}}` | Operator of operation and Buddy (checker) | `ar-srinivass01 / xulun01` | ❌ |
 | `{{ENV}}` | Environment for which this operation is being performed | `PROD` | ❌ |
 | `{{ENV_DOMAIN}}` | Domain of the environment that can be used for API calls | `dns-api.r-local.net` | ❌ |
@@ -86,7 +84,7 @@
 | `{{ACTIONS_WORKFLOW_TAG_LINK}}` | Link to the GHE tag whose GitHub Actions workflows would be run | https://github.com/Core-Resource-Group/apollo-automation/releases/tag/frozen-workflow-v1 | ❌ |
 | `{{CONFIG_ROLLOUT_COMMIT_HASH}}` | Full Commit hash of the rollout tag in the `apollo-automation` repo | `182248ff3e0cd46d572d0306bb62e365ace489ed` | ❌ |
 | `{{CONFIG_ROLLOUT_COMMIT_HASH_LINK}}` | Link to the GHE Commit hash for the configuration release | https://github.com/Core-Resource-Group/apollo-automation/commit/182248ff3e0cd46d572d0306bb62e365ace489ed | ❌ |
-| `{{K8S_TEMPORARY_MANIFEST_FILE_PATH}}` | Path of the K8s temporary manifest file relative to the `apollo-automation` repo root - added so that until the cache refreshes, both, the new and old I\*\*\*\*\*\*x servers are accessible | `operations/temporary-rollout.yaml` | ❌ |
+| `{{K8S_TEMPORARY_MANIFEST_FILE_PATH}}` | Path of the K8s temporary manifest file relative to the `apollo-automation` repo root - added so that until the cache refreshes, both, the new and old DNS Software A servers are accessible | `operations/temporary-rollout.yaml` | ❌ |
 | `{{K8S_MANIFEST_FILE_PATH}}` | Path of the K8s manifest file to be applied finally relative to the `apollo-automation` repo root | `operations/rollout.yaml` | ❌ |
 | `{{K8S_ROLLBACK_MANIFEST_FILE_PATH}}` | Path of the K8s rollback manifest file relative to the `apollo-automation` repo root | `operations/rollback.yaml` | ❌ |
 | `{{DB_PATCH_FILE_PATH}}` | Path of the DB patch file relative to the `apollo-automation` repo root | `operations/rollout.cql` | ❌ |
@@ -153,10 +151,10 @@ DNS Server Upgrade
 {{ENV}}
 
 ■ Impact
-{{USER_IMPACT}}
+❌
 
 ■ Risk
-{{RISK_LEVEL}}
+MEDIUM
 
 ■ Target Component
 CaaS Clusters: {{ACTIVE_CLUSTER}} (Active) and {{STANDBY_CLUSTER}} (Standby)
@@ -292,13 +290,13 @@ If even one of the below is met, the operation must be aborted and rolled back:
 
 ## 11. Operations Procedure
 
-### Step 1 — Setting of the I\*\*\*\*\*\*x server in maintenance
+### Step 1 — Setting of the DNS Software A server in maintenance
 
 > **Action type:** CHANGE
 >
 > **Why:** To enable read-only access so that no records are created/modified/deleted while the operation is going on.
 >
-> **Scope:** ⚠️ This is the step that enables read-only access to records residing on the I\*\*\*\*\*\*x server so that no records are created/modified/deleted on the server while the operation is going on.
+> **Scope:** ⚠️ This is the step that enables read-only access to records residing on the DNS Software A server so that no records are created/modified/deleted on the server while the operation is going on.
 >
 > **Abortion:** ✅ Safe to abort — this is the first step. No impact.
 >
@@ -309,7 +307,7 @@ Link: `{{CONFIG_REPO_DOMAIN}}/actions/workflows/manage-maintenance-status.yml`
 
 The below workflow with the passed values includes the following steps:
 1. Bearer token generation using the OneCloud Token API
-2. Setting the I\*\*\*\*\*\*x server in maintenance mode
+2. Setting the DNS Software A server in maintenance mode
 
 **Appearance:**
 
@@ -336,55 +334,15 @@ Click "Run Workflow" and set:
 
 ---
 
-### Step 2 — Active Cluster: Application of Temporary Manifest
+### Step 2 — Standby Cluster: Application of Temporary Manifest
 
 > **Action type:** CHANGE
 >
-> **Why:** So that in the time between the DB patch and the cache refresh, the old and new I\*\*\*\*\*\*x servers are accessible from the deployments in the active cluster.
+> **Why:** So that in the time between the DB patch and the cache refresh, the old and new DNS Software A servers are accessible from the deployments in the standby cluster.
 >
-> **Scope:** Applies a temporary manifest containing a network policy that permits the IPs of both, the old and new I\*\*\*\*\*\*x servers. No application pods are touched.
+> **Scope:** Applies a temporary manifest containing a network policy that permits the IPs of both, the old and new DNS Software A servers. No application pods are touched.
 >
-> **Abortion:** ✅ Safe to abort — the temporary manifest only adds access to the new I\*\*\*\*\*\*x server alongside the existing old I\*\*\*\*\*\*x server access; if aborted, apply the rollback manifest (Section 12.2) and escalate per Section 10.
->
-> **Automation Level:** Pipeline (GitHub Actions Workflow)
-
-Link: `{{CONFIG_REPO_DOMAIN}}/actions/workflows/apply-k8s-manifest.yml`
-
-The below workflow with the passed values includes the following steps:
-1. Checkout of the passed commit hash
-2. Restoration of the git-crypt symmetric key and unlocking of the repository
-3. Validation of the manifest (path validation, validation of existence in the repo, format validation)
-4. Application of the manifest
-5. Locking of the repository
-
-**Appearance:**
-
-![GitHub Actions K8s Manifest Application Workflow Input](https://confluence.rakuten-it.com/confluence/download/attachments/6941345438/k8smanifestapplication.png)
-
-Click "Run Workflow" and set:
-- **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
-- **Cluster to apply to:** `{{ACTIVE_CLUSTER}}`
-- **Full Configuration commit hash to check out (blank = default branch/tag):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
-- **Path to the Kubernetes manifest YAML to apply, relative to the repository root:** `{{K8S_TEMPORARY_MANIFEST_FILE_PATH}}`
-
-**Expected Result:** Success.
-**Validation:** Confirm the command completed with no error output on the GH Actions Console.
-
-| ✅ Condition to proceed to the next step | ⛔ Action if condition not met |
-|---|---|
-| Manifest applied without error | Do not proceed — investigate the failure by checking the contents of the `{{K8S_TEMPORARY_MANIFEST_FILE_PATH}}` in the repo and escalate per Section 10 if needed. |
-
----
-
-### Step 3 — Standby Cluster: Application of Temporary Manifest
-
-> **Action type:** CHANGE
->
-> **Why:** So that in the time between the DB patch and the cache refresh, the old and new I\*\*\*\*\*\*x servers are accessible from the deployments in the standby cluster.
->
-> **Scope:** Applies a temporary manifest containing a network policy that permits the IPs of both, the old and new I\*\*\*\*\*\*x servers. No application pods are touched.
->
-> **Abortion:** ✅ Safe to abort — the temporary manifest only adds access to the new I\*\*\*\*\*\*x server alongside the existing old I\*\*\*\*\*\*x server access; if aborted, apply the rollback manifest (Section 12.2) and escalate per Section 10.
+> **Abortion:** ✅ Safe to abort — the temporary manifest only adds access to the new DNS Software A server alongside the existing old DNS Software A server access; if aborted, apply the rollback manifest (Section 12.2) and escalate per Section 10.
 >
 > **Automation Level:** Pipeline (GitHub Actions Workflow)
 
@@ -416,13 +374,53 @@ Click "Run Workflow" and set:
 
 ---
 
+### Step 3 — Active Cluster: Application of Temporary Manifest
+
+> **Action type:** CHANGE
+>
+> **Why:** So that in the time between the DB patch and the cache refresh, the old and new DNS Software A servers are accessible from the deployments in the active cluster.
+>
+> **Scope:** Applies a temporary manifest containing a network policy that permits the IPs of both, the old and new DNS Software A servers. No application pods are touched.
+>
+> **Abortion:** ✅ Safe to abort — the temporary manifest only adds access to the new DNS Software A server alongside the existing old DNS Software A server access; if aborted, apply the rollback manifest (Section 12.2) and escalate per Section 10.
+>
+> **Automation Level:** Pipeline (GitHub Actions Workflow)
+
+Link: `{{CONFIG_REPO_DOMAIN}}/actions/workflows/apply-k8s-manifest.yml`
+
+The below workflow with the passed values includes the following steps:
+1. Checkout of the passed commit hash
+2. Restoration of the git-crypt symmetric key and unlocking of the repository
+3. Validation of the manifest (path validation, validation of existence in the repo, format validation)
+4. Application of the manifest
+5. Locking of the repository
+
+**Appearance:**
+
+![GitHub Actions K8s Manifest Application Workflow Input](https://confluence.rakuten-it.com/confluence/download/attachments/6941345438/k8smanifestapplication.png)
+
+Click "Run Workflow" and set:
+- **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
+- **Cluster to apply to:** `{{ACTIVE_CLUSTER}}`
+- **Full Configuration commit hash to check out (blank = default branch/tag):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
+- **Path to the Kubernetes manifest YAML to apply, relative to the repository root:** `{{K8S_TEMPORARY_MANIFEST_FILE_PATH}}`
+
+**Expected Result:** Success.
+**Validation:** Confirm the command completed with no error output on the GH Actions Console.
+
+| ✅ Condition to proceed to the next step | ⛔ Action if condition not met |
+|---|---|
+| Manifest applied without error | Do not proceed — investigate the failure by checking the contents of the `{{K8S_TEMPORARY_MANIFEST_FILE_PATH}}` in the repo and escalate per Section 10 if needed. |
+
+---
+
 ### Step 4 — Data Patch Incorporation after successful migration
 
 > **Action type:** CHANGE
 >
-> **Why:** The configuration of the new I\*\*\*\*\*\*x server needs to be added.
+> **Why:** The configuration of the new DNS Software A server needs to be added.
 >
-> **Scope:** Applies a CQL patch to the shared, multi-AZ Cassandra DB. The patch contains the configuration of the new I\*\*\*\*\*\*x server (which is not set in maintenance). No application pods are touched.
+> **Scope:** Applies a CQL patch to the shared, multi-AZ Cassandra DB. The patch contains the configuration of the new DNS Software A server (which is not set in maintenance). No application pods are touched.
 >
 > **Abortion:** ⚠️ Not trivially reversible — the patch affects the shared database. If this must be undone, use the rollback data patch procedure (Section 12.2) and escalate per Section 10.
 >
@@ -458,15 +456,15 @@ Click "Run Workflow" and set:
 
 ---
 
-### Step 5 — Active Cluster: Application of Final Manifest
+### Step 5 — Standby Cluster: Application of Final Manifest
 
 > **Action type:** CHANGE
 >
-> **Why:** So that only the new I\*\*\*\*\*\*x server is made accessible from the deployments in the active cluster.
+> **Why:** So that only the new DNS Software A server is made accessible from the deployments in the standby cluster.
 >
-> **Scope:** Applies the final manifest containing a network policy that permits the IPs of only the new I\*\*\*\*\*\*x server. No application pods are touched.
+> **Scope:** Applies the final manifest containing a network policy that permits the IPs of only the new DNS Software A server. No application pods are touched.
 >
-> **Abortion:** ⚠️ Not a simple abortion — this step removes access to the old I\*\*\*\*\*\*x server; if aborted, apply the rollback data patch and the rollback manifest (Section 12.2) and escalate per Section 10.
+> **Abortion:** ⚠️ Not a simple abortion — this step removes access to the old DNS Software A server; if aborted, apply the rollback data patch and the rollback manifest (Section 12.2) and escalate per Section 10.
 >
 > **Automation Level:** Pipeline (GitHub Actions Workflow)
 
@@ -485,7 +483,7 @@ The below workflow with the passed values includes the following steps:
 
 After 5 minutes, Click "Run Workflow" and set:
 - **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
-- **Cluster to apply to:** `{{ACTIVE_CLUSTER}}`
+- **Cluster to apply to:** `{{STANDBY_CLUSTER}}`
 - **Full Configuration commit hash to check out (blank = default branch/tag):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
 - **Path to the Kubernetes manifest YAML to apply, relative to the repository root:** `{{K8S_MANIFEST_FILE_PATH}}`
 
@@ -498,15 +496,15 @@ After 5 minutes, Click "Run Workflow" and set:
 
 ---
 
-### Step 6 — Standby Cluster: Application of Final Manifest
+### Step 6 — Active Cluster: Application of Final Manifest
 
 > **Action type:** CHANGE
 >
-> **Why:** So that only the new I\*\*\*\*\*\*x server is made accessible from the deployments in the standby cluster.
+> **Why:** So that only the new DNS Software A server is made accessible from the deployments in the active cluster.
 >
-> **Scope:** Applies the final manifest containing a network policy that permits the IPs of only the new I\*\*\*\*\*\*x server. No application pods are touched.
+> **Scope:** Applies the final manifest containing a network policy that permits the IPs of only the new DNS Software A server. No application pods are touched.
 >
-> **Abortion:** ⚠️ Not a simple abortion — this step removes access to the old I\*\*\*\*\*\*x server; if aborted, apply the rollback data patch and the rollback manifest (Section 12.2) and escalate per Section 10.
+> **Abortion:** ⚠️ Not a simple abortion — this step removes access to the old DNS Software A server; if aborted, apply the rollback data patch and the rollback manifest (Section 12.2) and escalate per Section 10.
 >
 > **Automation Level:** Pipeline (GitHub Actions Workflow)
 
@@ -525,7 +523,7 @@ The below workflow with the passed values includes the following steps:
 
 Click "Run Workflow" and set:
 - **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
-- **Cluster to apply to:** `{{STANDBY_CLUSTER}}`
+- **Cluster to apply to:** `{{ACTIVE_CLUSTER}}`
 - **Full Configuration commit hash to check out (blank = default branch/tag):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
 - **Path to the Kubernetes manifest YAML to apply, relative to the repository root:** `{{K8S_MANIFEST_FILE_PATH}}`
 
@@ -616,33 +614,7 @@ Initiate rollback if **any** of the following conditions are met (identical to S
 
 **Rollback duration:** ~5 minutes
 
-#### Step 12.2.1 — Active Cluster: Application of Temporary Manifest
-
-Link: `{{CONFIG_REPO_DOMAIN}}/actions/workflows/apply-k8s-manifest.yml`
-
-The below workflow with the passed values includes the following steps:
-1. Checkout of the passed commit hash
-2. Restoration of the git-crypt symmetric key and unlocking of the repository
-3. Validation of the manifest (path validation, validation of existence in the repo, format validation)
-4. Application of the manifest
-5. Locking of the repository
-
-**Appearance:**
-
-![GitHub Actions K8s Manifest Application Workflow Input](https://confluence.rakuten-it.com/confluence/download/attachments/6941345438/k8smanifestapplication.png)
-
-Click "Run Workflow" and set:
-- **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
-- **Cluster to apply to:** `{{ACTIVE_CLUSTER}}`
-- **Full Configuration commit hash to check out (blank = default branch/tag):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
-- **Path to the Kubernetes manifest YAML to apply, relative to the repository root:** `{{K8S_TEMPORARY_MANIFEST_FILE_PATH}}`
-
-**Expected Result:** Success.
-**Validation:** Confirm the command completed with no error output on the GH Actions Console.
-
----
-
-#### Step 12.2.2 — Standby Cluster: Application of Temporary Manifest
+#### Step 12.2.1 — Standby Cluster: Application of Temporary Manifest
 
 Link: `{{CONFIG_REPO_DOMAIN}}/actions/workflows/apply-k8s-manifest.yml`
 
@@ -668,9 +640,35 @@ Click "Run Workflow" and set:
 
 ---
 
+#### Step 12.2.2 — Active Cluster: Application of Temporary Manifest
+
+Link: `{{CONFIG_REPO_DOMAIN}}/actions/workflows/apply-k8s-manifest.yml`
+
+The below workflow with the passed values includes the following steps:
+1. Checkout of the passed commit hash
+2. Restoration of the git-crypt symmetric key and unlocking of the repository
+3. Validation of the manifest (path validation, validation of existence in the repo, format validation)
+4. Application of the manifest
+5. Locking of the repository
+
+**Appearance:**
+
+![GitHub Actions K8s Manifest Application Workflow Input](https://confluence.rakuten-it.com/confluence/download/attachments/6941345438/k8smanifestapplication.png)
+
+Click "Run Workflow" and set:
+- **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
+- **Cluster to apply to:** `{{ACTIVE_CLUSTER}}`
+- **Full Configuration commit hash to check out (blank = default branch/tag):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
+- **Path to the Kubernetes manifest YAML to apply, relative to the repository root:** `{{K8S_TEMPORARY_MANIFEST_FILE_PATH}}`
+
+**Expected Result:** Success.
+**Validation:** Confirm the command completed with no error output on the GH Actions Console.
+
+---
+
 #### Step 12.2.3 — Data Patch Incorporation
 
-Please note that the patch contains the configuration of the old I\*\*\*\*\*\*x server (which is not set in maintenance).
+Please note that the patch contains the configuration of the old DNS Software A server (which is not set in maintenance).
 
 Link: `{{CONFIG_REPO_DOMAIN}}/actions/workflows/apply-cql-data-patch.yml`
 
@@ -698,7 +696,7 @@ Click "Run Workflow" and set:
 
 ---
 
-#### Step 12.2.4 — Active Cluster: Application of Rollback Manifest
+#### Step 12.2.4 — Standby Cluster: Application of Rollback Manifest
 
 Link: `{{CONFIG_REPO_DOMAIN}}/actions/workflows/apply-k8s-manifest.yml`
 
@@ -715,7 +713,7 @@ The below workflow with the passed values includes the following steps:
 
 After 5 minutes, Click "Run Workflow" and set:
 - **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
-- **Cluster to apply to:** `{{ACTIVE_CLUSTER}}`
+- **Cluster to apply to:** `{{STANDBY_CLUSTER}}`
 - **Full Configuration commit hash to check out (blank = default branch/tag):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
 - **Path to the Kubernetes manifest YAML to apply, relative to the repository root:** `{{K8S_ROLLBACK_MANIFEST_FILE_PATH}}`
 
@@ -724,7 +722,7 @@ After 5 minutes, Click "Run Workflow" and set:
 
 ---
 
-#### Step 12.2.5 — Standby Cluster: Application of Rollback Manifest
+#### Step 12.2.5 — Active Cluster: Application of Rollback Manifest
 
 Link: `{{CONFIG_REPO_DOMAIN}}/actions/workflows/apply-k8s-manifest.yml`
 
@@ -741,7 +739,7 @@ The below workflow with the passed values includes the following steps:
 
 Click "Run Workflow" and set:
 - **Use workflow from:** Tag `{{ACTIONS_WORKFLOW_TAG}}`
-- **Cluster to apply to:** `{{STANDBY_CLUSTER}}`
+- **Cluster to apply to:** `{{ACTIVE_CLUSTER}}`
 - **Full Configuration commit hash to check out (blank = default branch/tag):** `{{CONFIG_ROLLOUT_COMMIT_HASH}}`
 - **Path to the Kubernetes manifest YAML to apply, relative to the repository root:** `{{K8S_ROLLBACK_MANIFEST_FILE_PATH}}`
 

@@ -73,8 +73,6 @@
 |---|---|---|:---:|
 | `{{OPERATION_TICKET_JIRA_LINK}}` | Jira link to the operation ticket | https://jira.rakuten-it.com/jira/browse/CPSDCM-XXXX | ❌ |
 | `{{DATE_TIME}}` | Date and time of the operation. Include the start and end time. | `2026-03-21 1400-1600 hrs JST` | ❌ |
-| `{{RISK_LEVEL}}` | Risk level of the operation, taking into account service and operational risk | `MEDIUM` | ❌ |
-| `{{USER_IMPACT}}` | Impact on existing users if the operation is performed |  ✅(Explain)/❌ | ❌ |
 | `{{OPERATOR_NAME}}` / `{{BUDDY_NAME}}` | Operator of operation and Buddy (checker) | `ar-srinivass01 / xulun01` | ❌ |
 | `{{ENV}}` | Environment for which this operation is being performed | `PROD` | ❌ |
 | `{{ENV_DOMAIN}}` | Domain of the environment that can be used for API calls | `dns-api.r-local.net` | ❌ |
@@ -151,10 +149,10 @@ To enable users to start managing records in the whitelisted AZs
 {{ENV}}
 
 ■ Impact
-{{USER_IMPACT}}
+❌
 
 ■ Risk
-{{RISK_LEVEL}}
+MEDIUM
 
 ■ Target Component
 CaaS Clusters: {{ACTIVE_CLUSTER}} (Active) and {{STANDBY_CLUSTER}} (Standby)
