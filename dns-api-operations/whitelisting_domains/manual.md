@@ -87,14 +87,6 @@
 | `{{CONFIG_ROLLOUT_COMMIT_HASH_LINK}}` | Link to the GHE Commit hash for the configuration release | https://github.com/Core-Resource-Group/apollo-automation/commit/182248ff3e0cd46d572d0306bb62e365ace489ed | ❌ |
 | `{{DB_PATCH_FILE_PATH}}` | Path of the DB patch file relative to the `apollo-automation` repo root | `operations/rollout.cql` | ❌ |
 | `{{DB_ROLLBACK_PATCH_FILE_PATH}}` | Path of the DB rollback patch file relative to the `apollo-automation` repo root | `operations/rollback.cql` | ❌ |
-| `{{CASSANDRA_AZ_1}}` | First AZ of the Cassandra Cluster | `jpe2b` | ❌ |
-| `{{CASSANDRA_AZ_1_FQDN_1}}` | FQDN of the first node in the first AZ of the Cassandra cluster | Resembling `omnia-apollo-cassandra-prod-012.dbaas.jpe2b.dcnw.rakuten` | ❌ |
-| `{{CASSANDRA_AZ_1_FQDN_2}}` | FQDN of the second node in the first AZ of the Cassandra cluster | Resembling `omnia-apollo-cassandra-prod-012.dbaas.jpe2b.dcnw.rakuten` | ❌ |
-| `{{CASSANDRA_AZ_1_FQDN_3}}` | FQDN of the third node in the first AZ of the Cassandra cluster | Resembling `omnia-apollo-cassandra-prod-012.dbaas.jpe2b.dcnw.rakuten` | ❌ |
-| `{{CASSANDRA_AZ_2}}` | Second AZ of the Cassandra Cluster |  `jpw2a` | ❌ |
-| `{{CASSANDRA_AZ_2_FQDN_1}}` | FQDN of the first node in the second AZ of the Cassandra cluster | Resembling `omnia-apollo-cassandra-prod-012.dbaas.jpe2b.dcnw.rakuten` | ❌ |
-| `{{CASSANDRA_AZ_2_FQDN_2}}` | FQDN of the second node in the second AZ of the Cassandra cluster | Resembling `omnia-apollo-cassandra-prod-012.dbaas.jpe2b.dcnw.rakuten` | ❌ |
-| `{{CASSANDRA_AZ_2_FQDN_3}}` | FQDN of the third node in the second AZ of the Cassandra cluster | Resembling `omnia-apollo-cassandra-prod-012.dbaas.jpe2b.dcnw.rakuten` | ❌ |
 | `{{GRAFANA_LINK}}` | Grafana used to monitor application health — powered by the Blackbox Exporter | https://monitor.rakuten-it.com/v2/d/sOhyjvovk/api-health-dev?orgId=1&refresh=10s | ❌ |
 | `{{GRAFANA_ENV}}` | Grafana Health Dashboard Environment Name | `Dev` / `Prod` | ❌ |
 

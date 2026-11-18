@@ -106,15 +106,7 @@
 | `{{ACTIVE_CLUSTER_ACTIVE_COLOR}}` | The color of the side currently serving traffic on the Active cluster. Determined in Step 6D of Section 6. | `blue/green` | ❌ |
 | `{{ACTIVE_CLUSTER_INACTIVE_COLOR}}` | The color of the side currently not serving traffic on the Active cluster. Determined in Step 6D of Section 6. | `blue/green` | ❌ |
 | `{{STANDBY_CLUSTER_ACTIVE_COLOR}}` | The color of the side currently serving traffic on the Standby cluster. Determined in Step 6E of Section 6. | `blue/green` | ❌ |
-| `{{STANDBY_CLUSTER_INACTIVE_COLOR}}` | The color of the side currently not serving traffic on the Standby cluster. Determined in Step 6E of Section 6. | `blue/green` | ❌ |
-| `{{CASSANDRA_AZ_1}}` | First AZ of the Cassandra Cluster | `jpe2b` | ❌ |
-| `{{CASSANDRA_AZ_1_FQDN_1}}` | FQDN of the first node in the first AZ of the Cassandra cluster | Resembling `omnia-apollo-cassandra-prod-012.dbaas.jpe2b.dcnw.rakuten` | ❌ |
-| `{{CASSANDRA_AZ_1_FQDN_2}}` | FQDN of the second node in the first AZ of the Cassandra cluster | Resembling `omnia-apollo-cassandra-prod-012.dbaas.jpe2b.dcnw.rakuten` | ❌ |
-| `{{CASSANDRA_AZ_1_FQDN_3}}` | FQDN of the third node in the first AZ of the Cassandra cluster | Resembling `omnia-apollo-cassandra-prod-012.dbaas.jpe2b.dcnw.rakuten` | ❌ |
-| `{{CASSANDRA_AZ_2}}` | Second AZ of the Cassandra Cluster |  `jpw2a` | ❌ |
-| `{{CASSANDRA_AZ_2_FQDN_1}}` | FQDN of the first node in the second AZ of the Cassandra cluster | Resembling `omnia-apollo-cassandra-prod-012.dbaas.jpe2b.dcnw.rakuten` | ❌ |
-| `{{CASSANDRA_AZ_2_FQDN_2}}` | FQDN of the second node in the second AZ of the Cassandra cluster | Resembling `omnia-apollo-cassandra-prod-012.dbaas.jpe2b.dcnw.rakuten` | ❌ |
-| `{{CASSANDRA_AZ_2_FQDN_3}}` | FQDN of the third node in the second AZ of the Cassandra cluster | Resembling `omnia-apollo-cassandra-prod-012.dbaas.jpe2b.dcnw.rakuten` | ❌ |
+| `{{STANDBY_CLUSTER_INACTIVE_COLOR}}` | The color of the side currently not serving traffic on the Standby cluster. Determined in Step 6E of Section 6. | `blue/green` | ❌ | |
 | `{{ACTIVE_CLUSTER_HARBOR}}` (Harbor for Active) | Harbor Registry holding the images used by the `dns-api-apollo` namespace in the Active cluster | `registry-jpe1.r-local.net` | ❌ |
 | `{{STANDBY_CLUSTER_HARBOR}}` (Harbor for Standby) | Harbor Registry holding the images used by the `dns-api-apollo` namespace in the Standby cluster | `registry-jpe2.r-local.net` | ❌ |
 | `{{GRAFANA_LINK}}` | Grafana used to monitor application health — powered by the Blackbox Exporter | https://monitor.rakuten-it.com/v2/d/sOhyjvovk/api-health-dev?orgId=1&refresh=10s | ❌ |
